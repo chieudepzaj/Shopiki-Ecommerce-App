@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "959762747859",
+    "firebase_url": "https://shopiki-259c1-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "shopiki-259c1",
+    "storage_bucket": "shopiki-259c1.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:959762747859:android:5504869d0a65c19e6b9f26",
+        "android_client_info": {
+          "package_name": "com.example.shopiki"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "959762747859-hh8i1hui6me5pb32v1npqkdf4rdjb5hl.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.shopiki",
+            "certificate_hash": "12d7acae4d0386b75d65c49e992a5a3378cece30"
+          }
+        },
+        {
+          "client_id": "959762747859-nvuom96na691f611iigv16etnatdr5jg.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA9iX92Y-BuDsmXclpAbQDm-R5UdBO2WnE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "959762747859-nvuom96na691f611iigv16etnatdr5jg.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
