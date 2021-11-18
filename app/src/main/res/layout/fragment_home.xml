@@ -12,6 +12,7 @@
         android:id="@+id/home_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginTop="3dp"
         android:orientation="vertical">
 
         <com.denzcoskun.imageslider.ImageSlider
@@ -33,9 +34,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:fontFamily="@font/amethysta"
+                android:fontFamily="@font/shopee2021regular"
                 android:text="Danh Mục Nổi Bật"
-                android:textSize="21sp"
+                android:textColor="@color/red"
+                android:textSize="17sp"
                 android:textStyle="bold" />
 
             <TextView
@@ -44,12 +46,12 @@
                 android:layout_height="wrap_content"
                 android:layout_marginRight="8dp"
                 android:layout_weight="1"
-                android:fontFamily="@font/amethysta"
+                android:fontFamily="@font/shopee2021regular"
                 android:gravity="end"
                 android:text="Xem Thêm"
-                android:textColor="@color/pink"
-                android:textSize="18sp"
-                android:textStyle="bold" />
+                android:textColor="@color/shoppecolor"
+                android:textSize="17sp"
+                android:textStyle="normal" />
 
         </LinearLayout>
 
@@ -72,6 +74,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_marginTop="7dp"
                 android:orientation="vertical">
 
                 <RelativeLayout
@@ -83,16 +86,30 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="9dp"
-                        android:fontFamily="@font/amethysta"
+                        android:layout_marginTop="3dp"
+                        android:fontFamily="@font/shopee2021regular"
                         android:text="Hôm Nay Có Gì Hot"
-                        android:textSize="21sp"
+                        android:textColor="@color/red"
+                        android:textSize="17sp"
                         android:textStyle="bold" />
+
+                    <ImageView
+                        android:id="@+id/dealhot"
+                        android:layout_width="27dp"
+                        android:layout_height="27dp"
+                        android:layout_marginTop="1dp"
+                        android:layout_marginLeft="155dp"
+                        android:src="@drawable/dealhot"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_below="@+id/new_product_name"
                         android:layout_marginLeft="9dp"
+                        android:fontFamily="@font/shopee2021regular"
                         android:text="Mua sắm với nhiều ưu đãi" />
 
                     <TextView
@@ -100,12 +117,13 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentEnd="true"
+                        android:layout_marginTop="3dp"
                         android:layout_marginRight="8dp"
-                        android:fontFamily="@font/amethysta"
+                        android:fontFamily="@font/shopee2021regular"
                         android:text="Xem Thêm"
-                        android:textColor="@color/pink"
-                        android:textSize="18sp"
-                        android:textStyle="bold" />
+                        android:textColor="@color/shoppecolor"
+                        android:textSize="17sp"
+                        android:textStyle="normal" />
                 </RelativeLayout>
 
                 <androidx.recyclerview.widget.RecyclerView
@@ -122,20 +140,33 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_marginTop="7dp"
             android:orientation="vertical">
 
             <RelativeLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
 
+                <ImageView
+                    android:id="@+id/trending"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_marginLeft="5dp"
+                    android:src="@drawable/trending"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
                 <TextView
                     android:id="@+id/popular_products"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="9dp"
-                    android:fontFamily="@font/amethysta"
+                    android:layout_marginLeft="35dp"
+                    android:layout_marginTop="1dp"
+                    android:fontFamily="@font/shopee2021regular"
                     android:text="Xu Hướng Mua Sắm"
-                    android:textSize="21sp"
+                    android:textColor="@color/red"
+                    android:textSize="17sp"
                     android:textStyle="bold" />
 
                 <TextView
@@ -143,7 +174,8 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/popular_products"
                     android:layout_marginLeft="9dp"
-                    android:text="Top Deal Gía Hời." />
+                    android:fontFamily="@font/shopee2021regular"
+                    android:text="Cập nhật mỗi ngày sản phẩm hot trend" />
 
                 <TextView
                     android:id="@+id/popular_see_all"
@@ -151,11 +183,12 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
                     android:layout_marginRight="8dp"
-                    android:fontFamily="@font/amethysta"
+                    android:layout_marginTop="1dp"
+                    android:fontFamily="@font/shopee2021regular"
                     android:text="Xem Thêm"
-                    android:textColor="@color/pink"
-                    android:textSize="18sp"
-                    android:textStyle="bold" />
+                    android:textColor="@color/shoppecolor"
+                    android:textSize="17sp"
+                    android:textStyle="normal" />
             </RelativeLayout>
 
             <androidx.recyclerview.widget.RecyclerView
@@ -163,6 +196,60 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
+                android:layout_margin="7dp"
+                android:layout_marginTop="6dp"
+                android:padding="5dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="7dp"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/suggest_product_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="9dp"
+                    android:layout_marginTop="3dp"
+                    android:fontFamily="@font/shopee2021regular"
+                    android:text="Gợi Ý Hôm Nay 🌞"
+                    android:textColor="@color/red"
+                    android:textSize="17sp"
+                    android:textStyle="bold" />
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/suggest_product_name"
+                    android:layout_marginLeft="9dp"
+                    android:fontFamily="@font/shopee2021regular"
+                    android:text="Gợi ý dành cho bạn" />
+
+                <TextView
+                    android:id="@+id/suggestProducts_see_all"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginTop="3dp"
+                    android:layout_marginRight="8dp"
+                    android:fontFamily="@font/shopee2021regular"
+                    android:text="Xem Thêm"
+                    android:textColor="@color/shoppecolor"
+                    android:textSize="17sp"
+                    android:textStyle="normal" />
+            </RelativeLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/suggest_product_rec"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_margin="7dp"
                 android:layout_marginTop="6dp"
                 android:padding="5dp" />
