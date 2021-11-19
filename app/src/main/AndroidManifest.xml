@@ -12,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Shopiki">
         <activity
+            android:name=".activities.CartActivity"
+            android:exported="false" />
+        <activity
             android:name=".activities.ShowAllActivity"
             android:exported="false" />
         <activity

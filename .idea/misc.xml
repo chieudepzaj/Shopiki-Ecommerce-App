@@ -10,6 +10,7 @@
         <entry key="..\:/Users/chieudepzaj/AndroidStudioProjects/Shopiki/app/src/main/res/drawable/ic_baseline_shopping_cart_24.xml" value="0.1" />
         <entry key="..\:/Users/chieudepzaj/AndroidStudioProjects/Shopiki/app/src/main/res/font/amethysta.xml" value="0.284375" />
         <entry key="..\:/Users/chieudepzaj/AndroidStudioProjects/Shopiki/app/src/main/res/font/arabotofont.xml" value="0.284375" />
+        <entry key="..\:/Users/chieudepzaj/AndroidStudioProjects/Shopiki/app/src/main/res/layout/activity_cart.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/chieudepzaj/AndroidStudioProjects/Shopiki/app/src/main/res/layout/activity_detailed.xml" value="0.7146932952924394" />
         <entry key="..\:/Users/chieudepzaj/AndroidStudioProjects/Shopiki/app/src/main/res/layout/activity_login.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/chieudepzaj/AndroidStudioProjects/Shopiki/app/src/main/res/layout/activity_main.xml" value="0.1" />
@@ -23,6 +24,7 @@
         <entry key="..\:/Users/chieudepzaj/AndroidStudioProjects/Shopiki/app/src/main/res/layout/show_all_item.xml" value="0.1" />
         <entry key="..\:/Users/chieudepzaj/AndroidStudioProjects/Shopiki/app/src/main/res/layout/sliding_layout.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/chieudepzaj/AndroidStudioProjects/Shopiki/app/src/main/res/layout/suggest_items.xml" value="0.13020833333333334" />
+        <entry key="..\:/Users/chieudepzaj/AndroidStudioProjects/Shopiki/app/src/main/res/menu/main_menu.xml" value="0.1" />
       </map>
     </option>
   </component>

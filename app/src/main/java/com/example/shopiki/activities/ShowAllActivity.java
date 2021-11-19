@@ -30,6 +30,8 @@ public class ShowAllActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_all);
+        getSupportActionBar().hide();
+        String type = getIntent().getStringExtra("type");
 
         firestore = FirebaseFirestore.getInstance();
         recyclerView = findViewById(R.id.show_all_rec);
@@ -38,19 +40,149 @@ public class ShowAllActivity extends AppCompatActivity {
         showAllAdapter = new ShowAllAdapter(this, showAllModelList);
         recyclerView.setAdapter(showAllAdapter);
 
-        firestore.collection("ShowAll")
-                .get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if(task.isSuccessful()){
-                            for(DocumentSnapshot doc :task.getResult().getDocuments()){
+        if(type == null || type.isEmpty()) {
+            firestore.collection("ShowAll")
+                    .get()
+                    .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                            if (task.isSuccessful()) {
+                                for (DocumentSnapshot doc : task.getResult().getDocuments()) {
                                     ShowAllModel showAllModel = doc.toObject(ShowAllModel.class);
                                     showAllModelList.add(showAllModel);
                                     showAllAdapter.notifyDataSetChanged();
+                                }
                             }
                         }
-                    }
-                });
+                    });
+        }
+        if (type != null && type.equalsIgnoreCase("bachhoa")){
+            firestore.collection("ShowAll").whereEqualTo("type","bachhoa")
+                    .get()
+                    .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                            if(task.isSuccessful()){
+                                for(DocumentSnapshot doc :task.getResult().getDocuments()){
+                                    ShowAllModel showAllModel = doc.toObject(ShowAllModel.class);
+                                    showAllModelList.add(showAllModel);
+                                    showAllAdapter.notifyDataSetChanged();
+                                }
+                            }
+                        }
+                    });
+        }
+        if (type != null && type.equalsIgnoreCase("electronic")){
+            firestore.collection("ShowAll").whereEqualTo("type","electronic")
+                    .get()
+                    .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                            if(task.isSuccessful()){
+                                for(DocumentSnapshot doc :task.getResult().getDocuments()){
+                                    ShowAllModel showAllModel = doc.toObject(ShowAllModel.class);
+                                    showAllModelList.add(showAllModel);
+                                    showAllAdapter.notifyDataSetChanged();
+                                }
+                            }
+                        }
+                    });
+        }
+        if (type != null && type.equalsIgnoreCase("camera")){
+            firestore.collection("ShowAll").whereEqualTo("type","camera")
+                    .get()
+                    .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                            if(task.isSuccessful()){
+                                for(DocumentSnapshot doc :task.getResult().getDocuments()){
+                                    ShowAllModel showAllModel = doc.toObject(ShowAllModel.class);
+                                    showAllModelList.add(showAllModel);
+                                    showAllAdapter.notifyDataSetChanged();
+                                }
+                            }
+                        }
+                    });
+        }
+        if (type != null && type.equalsIgnoreCase("fashion")){
+            firestore.collection("ShowAll").whereEqualTo("type","fashion")
+                    .get()
+                    .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                            if(task.isSuccessful()){
+                                for(DocumentSnapshot doc :task.getResult().getDocuments()){
+                                    ShowAllModel showAllModel = doc.toObject(ShowAllModel.class);
+                                    showAllModelList.add(showAllModel);
+                                    showAllAdapter.notifyDataSetChanged();
+                                }
+                            }
+                        }
+                    });
+        }
+        if (type != null && type.equalsIgnoreCase("mobiles")){
+            firestore.collection("ShowAll").whereEqualTo("type","mobiles")
+                    .get()
+                    .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                            if(task.isSuccessful()){
+                                for(DocumentSnapshot doc :task.getResult().getDocuments()){
+                                    ShowAllModel showAllModel = doc.toObject(ShowAllModel.class);
+                                    showAllModelList.add(showAllModel);
+                                    showAllAdapter.notifyDataSetChanged();
+                                }
+                            }
+                        }
+                    });
+        }
+        if (type != null && type.equalsIgnoreCase("thoitrangnu")){
+            firestore.collection("ShowAll").whereEqualTo("type","thoitrangnu")
+                    .get()
+                    .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                            if(task.isSuccessful()){
+                                for(DocumentSnapshot doc :task.getResult().getDocuments()){
+                                    ShowAllModel showAllModel = doc.toObject(ShowAllModel.class);
+                                    showAllModelList.add(showAllModel);
+                                    showAllAdapter.notifyDataSetChanged();
+                                }
+                            }
+                        }
+                    });
+        }
+        if (type != null && type.equalsIgnoreCase("shoes")){
+            firestore.collection("ShowAll").whereEqualTo("type","shoes")
+                    .get()
+                    .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                            if(task.isSuccessful()){
+                                for(DocumentSnapshot doc :task.getResult().getDocuments()){
+                                    ShowAllModel showAllModel = doc.toObject(ShowAllModel.class);
+                                    showAllModelList.add(showAllModel);
+                                    showAllAdapter.notifyDataSetChanged();
+                                }
+                            }
+                        }
+                    });
+        }
+        if (type != null && type.equalsIgnoreCase("Book")){
+            firestore.collection("ShowAll").whereEqualTo("type","Book")
+                    .get()
+                    .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                            if(task.isSuccessful()){
+                                for(DocumentSnapshot doc :task.getResult().getDocuments()){
+                                    ShowAllModel showAllModel = doc.toObject(ShowAllModel.class);
+                                    showAllModelList.add(showAllModel);
+                                    showAllAdapter.notifyDataSetChanged();
+                                }
+                            }
+                        }
+                    });
+        }
     }
 }

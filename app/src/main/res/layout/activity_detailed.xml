@@ -179,11 +179,11 @@
                 <ImageView
                     android:layout_marginRight="7dp"
                     android:layout_marginTop="5dp"
-                    android:layout_width="20dp"
+                    android:layout_width="18dp"
                     android:layout_height="20dp"
-                    android:layout_marginLeft="200dp"
-                    android:src="@drawable/plusicon"
-                    android:id="@+id/add_item"/>
+                    android:layout_marginLeft="190dp"
+                    android:src="@drawable/iconminus"
+                    android:id="@+id/remove_item" />
 
                 <TextView
                     android:id="@+id/quantity"
@@ -199,8 +199,8 @@
                     android:layout_marginTop="5dp"
                     android:layout_width="20dp"
                     android:layout_height="20dp"
-                    android:src="@drawable/iconminus"
-                    android:id="@+id/remove_item"/>
+                    android:src="@drawable/plusicon"
+                    android:id="@+id/add_item"/>
             </LinearLayout>
 
         </LinearLayout>
