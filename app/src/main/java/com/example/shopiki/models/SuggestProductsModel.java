@@ -1,6 +1,8 @@
 package com.example.shopiki.models;
 
-public class SuggestProductsModel {
+import java.io.Serializable;
+
+public class SuggestProductsModel implements Serializable {
     String description;
     String name;
     String rating;

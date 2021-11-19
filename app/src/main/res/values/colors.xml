@@ -10,8 +10,10 @@
     <color name="shoppecolor">#555555</color>
     <color name="blueheading">#5289c8</color>
     <color name="red">#ee4d2d</color>
+    <color name="red_real">#d0011b</color>
     <color name="pink">#FF5ccb</color>
     <color name="blue">#1a94ff</color>
     <color name="backgroundColor">#FFFCFC</color>
     <color name="textHeading">#008eff</color>
+    <color name="golden">#ffbe1a</color>
 </resources>

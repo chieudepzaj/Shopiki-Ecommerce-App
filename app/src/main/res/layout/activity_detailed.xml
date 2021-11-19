@@ -1,0 +1,271 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activities.DetailedActivity">
+
+    <ImageView
+        android:id="@+id/detailed_img"
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:src="@drawable/ic_launcher_background"
+        android:scaleType="centerInside"/>
+
+    <androidx.cardview.widget.CardView
+        android:translationY="-50dp"
+        android:id="@+id/cardview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:elevation="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/detailed_img">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/detailed_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/shopee2021regular"
+                    android:text="Product Name"
+                    android:textColor="@color/shoppecolor"
+                    android:textSize="16sp"
+                    android:textStyle="normal" />
+
+
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="left">
+
+                <TextView
+                    android:id="@+id/detailed_price"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="20"
+                    android:textSize="20sp"
+                    android:textStyle="normal"
+                    android:fontFamily="@font/shopee2021regular"
+                    android:textColor="@color/red"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=" ₫"
+                    android:textSize="20sp"
+                    android:textStyle="normal"
+                    android:fontFamily="@font/shopee2021regular"
+                    android:textColor="@color/red"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="left">
+
+                <RatingBar
+                    android:id="@+id/my_rating"
+                    style="?android:attr/ratingBarStyleSmall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginTop="10dp"
+                    android:isIndicator="true"
+                    android:numStars="5"
+                    android:stepSize="0.3" />
+
+                <TextView
+                    android:id="@+id/rating"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginLeft="3dp"
+                    android:layout_toStartOf="@+id/my_rating"
+                    android:fontFamily="@font/shopee2021regular"
+                    android:text="4.0"
+                    android:textColor="@color/shoppecolor"
+                    android:textSize="14sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="7dp"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <View
+                        android:layout_width="fill_parent"
+                        android:layout_height="1dp"
+                        android:background="#c0c0c0" />
+
+                    <TextView
+                        android:id="@+id/new_product_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="1dp"
+                        android:layout_marginTop="3dp"
+                        android:fontFamily="@font/shopee2021regular"
+                        android:text="Chi tiết sản phẩm"
+                        android:textColor="@color/black"
+                        android:textSize="16sp"
+                        android:textStyle="normal" />
+
+
+                </RelativeLayout>
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="1dp"
+                android:background="#c0c0c0" />
+
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="180dp">
+
+                <TextView
+                    android:id="@+id/detailed_desc"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/open_sans_light"
+                    android:text="Description product" />
+
+            </ScrollView>
+
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="10dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="1dp"
+                    android:layout_marginBottom="3dp"
+                    android:fontFamily="@font/shopee2021regular"
+                    android:text="Số lượng"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    android:textStyle="normal" />
+                <ImageView
+                    android:layout_marginRight="7dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_marginLeft="200dp"
+                    android:src="@drawable/plusicon"
+                    android:id="@+id/add_item"/>
+
+                <TextView
+                    android:id="@+id/quantity"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="1"
+                    android:textSize="20sp"
+                    android:textColor="@color/shoppecolor"
+                    android:fontFamily="@font/shopee2021regular"
+                    android:textStyle="bold"/>
+                <ImageView
+                    android:layout_marginLeft="7dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:src="@drawable/iconminus"
+                    android:id="@+id/remove_item"/>
+            </LinearLayout>
+
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/chat"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:padding="14dp"
+        android:text=" "
+        android:textColor="@color/red_real"
+        app:icon="@drawable/ic_baseline_chat_24"
+        app:iconPadding="0dp"
+        app:iconGravity="textStart"
+        app:iconTint="@color/red_real"
+        app:strokeColor="@color/red_real"
+        app:strokeWidth="2dp"
+        android:backgroundTint="@color/white"
+        android:textAllCaps="false"
+        android:layout_marginLeft="3dp"
+        android:layout_marginRight="2dp"
+        app:layout_constraintBottom_toBottomOf="@+id/add_to_card"
+        app:layout_constraintEnd_toStartOf="@+id/add_to_card"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/add_to_card"
+        app:layout_constraintWidth_percent=".5" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/add_to_card"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/shopee2021regular"
+        android:padding="14dp"
+        android:text=" "
+        app:icon="@drawable/ic_baseline_add_shopping_cart_24"
+        app:iconGravity="textStart"
+        app:iconPadding="0dp"
+        app:iconTint="@color/red_real"
+        app:strokeColor="@color/red_real"
+        app:strokeWidth="2dp"
+        android:backgroundTint="@color/white"
+        android:textAllCaps="false"
+        android:layout_marginLeft="77dp"
+        app:layout_constraintBottom_toBottomOf="@+id/buy_now"
+        app:layout_constraintEnd_toStartOf="@+id/buy_now"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/buy_now"
+        app:layout_constraintWidth_percent=".5" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/buy_now"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/shopee2021regular"
+        android:padding="14dp"
+        android:text="Mua Ngay"
+        android:backgroundTint="@color/red_real"
+        android:textAllCaps="false"
+        android:textStyle="normal"
+        android:layout_marginLeft="165dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cardview"
+        app:layout_constraintWidth_percent=".5" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

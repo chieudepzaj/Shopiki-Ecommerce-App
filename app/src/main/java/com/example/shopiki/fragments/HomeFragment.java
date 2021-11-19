@@ -1,5 +1,7 @@
 package com.example.shopiki.fragments;
 
+import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -12,6 +14,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.GridLayout;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.Toolbar;
 
@@ -19,6 +23,7 @@ import com.denzcoskun.imageslider.ImageSlider;
 import com.denzcoskun.imageslider.constants.ScaleTypes;
 import com.denzcoskun.imageslider.models.SlideModel;
 import com.example.shopiki.R;
+import com.example.shopiki.activities.ShowAllActivity;
 import com.example.shopiki.adapters.CategoryAdapter;
 import com.example.shopiki.adapters.NewProductsAdapter;
 import com.example.shopiki.adapters.PopularProductsAdapter;
@@ -38,6 +43,10 @@ import java.util.List;
 
 public class HomeFragment extends Fragment {
 
+    TextView catshowAll,newproductShowAll,popularproductShowAll,suggestProductShowAll;
+
+    LinearLayout linearLayout;
+    ProgressDialog progressDialog;
     RecyclerView catrecyclerView,newProductRecyclerview,trendProductRecyclerview,suggestProductRecyclerview;
         // Category recyclerview
     CategoryAdapter categoryAdapter;
@@ -66,15 +75,54 @@ public class HomeFragment extends Fragment {
         // Inflate the layout for this fragment
         View root = inflater.inflate(R.layout.fragment_home, container, false);
 
+        db = FirebaseFirestore.getInstance();
+
+        progressDialog = new ProgressDialog(getActivity());
         catrecyclerView = root.findViewById(R.id.rec_category);
         newProductRecyclerview = root.findViewById(R.id.new_product_rec);
         trendProductRecyclerview = root.findViewById(R.id.popular_rec);
         suggestProductRecyclerview = root.findViewById(R.id.suggest_product_rec);
 
+        catshowAll = root.findViewById(R.id.category_see_all);
+        newproductShowAll = root.findViewById(R.id.newProducts_see_all);
+        popularproductShowAll = root.findViewById(R.id.popular_see_all);
+        suggestProductShowAll = root.findViewById(R.id.suggestProducts_see_all);
 
-        db = FirebaseFirestore.getInstance();
 
+        catshowAll.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getContext(), ShowAllActivity.class);
+                startActivity(intent);
+            }
+        });
 
+        newproductShowAll.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getContext(), ShowAllActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        popularproductShowAll.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getContext(), ShowAllActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        suggestProductShowAll.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getContext(), ShowAllActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        linearLayout = root.findViewById(R.id.home_layout);
+        linearLayout.setVisibility(View.GONE);
         //image slider
         ImageSlider imageSlider = root.findViewById(R.id.image_slider);
         List<SlideModel> slideModels = new ArrayList<>();
@@ -86,6 +134,11 @@ public class HomeFragment extends Fragment {
         slideModels.add(new SlideModel(R.drawable.banner5,"Ngày Hội Xế Yêu - Siêu Ưu Đãi", ScaleTypes.CENTER_INSIDE));
         slideModels.add(new SlideModel(R.drawable.banner6,"Shopiki Ngon - Giá Hời Deal Ngon", ScaleTypes.CENTER_INSIDE));
         imageSlider.setImageList(slideModels);
+
+        progressDialog.setTitle("Shopiki - Thương hiệu của người Việt \uD83C\uDDFB\uD83C\uDDF3");
+        progressDialog.setMessage("Vui lòng chờ ....");
+        progressDialog.setCanceledOnTouchOutside(false);
+        progressDialog.show();
 
         //Category
         catrecyclerView.setLayoutManager(new LinearLayoutManager(getActivity(),RecyclerView.HORIZONTAL,false));
@@ -103,6 +156,8 @@ public class HomeFragment extends Fragment {
                                CategoryModel categoryModel = document.toObject(CategoryModel.class);
                                categoryModelList.add(categoryModel);
                                categoryAdapter.notifyDataSetChanged();
+                               linearLayout.setVisibility(View.VISIBLE);
+                               progressDialog.dismiss();
                             }
                         } else {
                             Toast.makeText(getActivity(), ""+task.getException(), Toast.LENGTH_SHORT).show();

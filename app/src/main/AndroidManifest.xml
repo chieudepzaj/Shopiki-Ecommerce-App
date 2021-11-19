@@ -12,10 +12,14 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Shopiki">
         <activity
+            android:name=".activities.ShowAllActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activities.DetailedActivity"
+            android:exported="false" />
+        <activity
             android:name=".activities.OnBoardingActivity"
-            android:exported="false" >
-
-        </activity>
+            android:exported="false" />
         <activity
             android:name=".activities.RegistrationActivity"
             android:exported="true">
@@ -30,7 +34,7 @@
             android:exported="false" />
         <activity
             android:name=".activities.MainActivity"
-            android:exported="false"></activity>
+            android:exported="false" />
 
         <meta-data
             android:name="preloaded_fonts"
