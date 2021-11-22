@@ -2,10 +2,12 @@ package com.example.shopiki.activities;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.view.View;
 
 import com.example.shopiki.R;
 import com.example.shopiki.adapters.ShowAllAdapter;
@@ -25,13 +27,25 @@ public class ShowAllActivity extends AppCompatActivity {
     ShowAllAdapter showAllAdapter;
     List<ShowAllModel> showAllModelList;
 
+    Toolbar toolbar;
     FirebaseFirestore firestore;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_all);
-        getSupportActionBar().hide();
+    //    getSupportActionBar().hide();
         String type = getIntent().getStringExtra("type");
+
+        toolbar = findViewById(R.id.show_all_toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
 
         firestore = FirebaseFirestore.getInstance();
         recyclerView = findViewById(R.id.show_all_rec);

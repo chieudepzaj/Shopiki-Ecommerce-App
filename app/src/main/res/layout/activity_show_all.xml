@@ -6,12 +6,25 @@
     android:layout_height="match_parent"
     tools:context=".activities.ShowAllActivity">
 
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/show_all_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:background="@color/red"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        app:title="Tất cả sản phẩm" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/show_all_rec"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toBottomOf="@+id/show_all_toolbar"
+        app:layout_constraintHorizontal_bias="0.0"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -10,11 +10,15 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.GridLayout;
 import android.widget.LinearLayout;
+import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.Toolbar;
@@ -27,13 +31,16 @@ import com.example.shopiki.activities.ShowAllActivity;
 import com.example.shopiki.adapters.CategoryAdapter;
 import com.example.shopiki.adapters.NewProductsAdapter;
 import com.example.shopiki.adapters.PopularProductsAdapter;
+import com.example.shopiki.adapters.ShowAllAdapter;
 import com.example.shopiki.adapters.SuggestProductsAdapter;
 import com.example.shopiki.models.CategoryModel;
 import com.example.shopiki.models.NewProductsModel;
 import com.example.shopiki.models.PopularProductsModel;
+import com.example.shopiki.models.ShowAllModel;
 import com.example.shopiki.models.SuggestProductsModel;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -61,6 +68,11 @@ public class HomeFragment extends Fragment {
     //Popular product
     SuggestProductsAdapter suggestProductsAdapter;
     List<SuggestProductsModel> suggestProductsModelList;
+    //Search
+    EditText search_box;
+    private  List<ShowAllModel> showAllModelList;
+    private  RecyclerView recyclerViewSearch;
+    private ShowAllAdapter viewAllAdapter;
     //Firestore
     FirebaseFirestore db;
     public HomeFragment() {
@@ -236,6 +248,61 @@ public class HomeFragment extends Fragment {
                     }
                 });
 
+        //Search View
+        recyclerViewSearch = root.findViewById(R.id.search_rec);
+        search_box = root.findViewById(R.id.search_box);
+        showAllModelList = new ArrayList<>();
+        viewAllAdapter = new ShowAllAdapter(getContext(),showAllModelList);
+        recyclerViewSearch.setLayoutManager(new LinearLayoutManager(getContext()));
+        recyclerViewSearch.setAdapter(viewAllAdapter);
+        recyclerViewSearch.setHasFixedSize(true);
+        search_box.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+                if(editable.toString().isEmpty()){
+                    showAllModelList.clear();
+                    viewAllAdapter.notifyDataSetChanged();
+                }else{
+
+                    searchProducttype(editable.toString());
+                }
+            }
+        });
+
         return root;
+    }
+
+    private void searchProducttype(String type) {
+
+        if(!type.isEmpty()){
+            db.collection("ShowAll").whereEqualTo("type",type).get()
+                    .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
+
+                            if(task.isSuccessful() && task.getResult() != null){
+                                showAllModelList.clear();
+                                viewAllAdapter.notifyDataSetChanged();
+                                for(DocumentSnapshot doc : task.getResult().getDocuments()){
+                                    ShowAllModel showAllModel = doc.toObject(ShowAllModel.class);
+                                    showAllModelList.add(showAllModel);
+                                    viewAllAdapter.notifyDataSetChanged();
+                                }
+                            }
+
+                        }
+                    });
+        }
     }
 }

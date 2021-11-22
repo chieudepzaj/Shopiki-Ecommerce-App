@@ -4,6 +4,63 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#C6C6C6"
     tools:context=".activities.CartActivity">
 
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/my_cart_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:background="@color/red"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        app:title="Giỏ Hàng" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/cart_rec"
+        android:layout_marginTop="5dp"
+        app:layout_constraintWidth_percent=".9"
+        app:layout_constraintTop_toBottomOf="@+id/my_cart_toolbar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:listitem="@layout/my_cart_item"/>
+
+    <TextView
+        android:id="@+id/textview3"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintWidth_percent=".9"
+        android:text="Tổng tiền hàng: 50000 ₫"
+        android:background="#ffffff"
+        android:fontFamily="@font/shopee2021regular"
+        android:textSize="20sp"
+        android:padding="18dp"
+        android:layout_marginBottom="70dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:gravity="center"/>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/buy_now"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/shopee2021regular"
+        android:layout_margin="10dp"
+        android:padding="14dp"
+        android:text="Mua Ngay"
+        android:backgroundTint="@color/red_real"
+        android:textAllCaps="false"
+        app:cornerRadius="10dp"
+        android:textStyle="normal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textview3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintWidth_percent=".9" />
 </androidx.constraintlayout.widget.ConstraintLayout>

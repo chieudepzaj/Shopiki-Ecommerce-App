@@ -2,12 +2,15 @@ package com.example.shopiki.activities;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import android.app.StatusBarManager;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -36,10 +39,12 @@ public class DetailedActivity extends AppCompatActivity {
 
     ImageView detailedImg;
     TextView rating,name,description,price,quantity;
-    Button addToCart,buyNow;
+    Button addToCart,buyNow,chat;
     ImageView addItems,removeItems ;
     float ratingba;
     private RatingBar ratingBar;
+
+    Toolbar toolbar;
     int totalQuantity = 1;
     int totalPrice = 0;
     //New Products
@@ -58,6 +63,16 @@ public class DetailedActivity extends AppCompatActivity {
         setContentView(R.layout.activity_detailed);
   //      getSupportActionBar().hide();
 
+        toolbar = findViewById(R.id.detailed_toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
         firebaseFirestore = FirebaseFirestore.getInstance();
         auth = FirebaseAuth.getInstance();
         final Object obj = getIntent().getSerializableExtra("detailed");
@@ -80,6 +95,7 @@ public class DetailedActivity extends AppCompatActivity {
         price = findViewById(R.id.detailed_price);
         addToCart = findViewById(R.id.add_to_card);
         buyNow = findViewById(R.id.buy_now);
+        chat = findViewById(R.id.chat);
         addItems = findViewById(R.id.add_item);
         removeItems = findViewById(R.id.remove_item);
         ratingBar = findViewById(R.id.my_rating);
@@ -143,6 +159,14 @@ public class DetailedActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 addToCart();
+            }
+        });
+        chat.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Uri uri = Uri.parse("https://www.facebook.com/dinhchieu.310599/");
+                Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+                startActivity(intent);
             }
         });
 

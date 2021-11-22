@@ -14,6 +14,23 @@
         android:layout_height="match_parent"
         android:layout_marginTop="3dp"
         android:orientation="vertical">
+        <EditText
+            android:id="@+id/search_box"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="3dp"
+            android:background="@drawable/search_bg"
+            android:drawableLeft="@drawable/ic_baseline_search_24"
+            android:drawablePadding="5dp"
+            android:elevation="3dp"
+            android:hint="Bạn tìm gì hôm nay ?"
+            android:padding="13dp"/>
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/search_rec"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="10dp"/>
 
         <com.denzcoskun.imageslider.ImageSlider
             android:id="@+id/image_slider"
