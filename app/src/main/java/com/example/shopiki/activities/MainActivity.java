@@ -2,19 +2,24 @@ package com.example.shopiki.activities;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.view.MenuItemCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.SearchView;
+
 import androidx.appcompat.widget.Toolbar;
 
 import com.example.shopiki.R;
 import com.example.shopiki.fragments.HomeFragment;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -47,7 +52,27 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.main_menu,menu);
+        MenuItem item = menu.findItem(R.id.search);
+        SearchView searchView = (SearchView) MenuItemCompat.getActionView(item);
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String s) {
+                searchData(s);
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String s) {
+                return false;
+            }
+        });
+
         return true;
+    }
+
+    private void searchData(String s) {
+
+
     }
 
     @Override
@@ -60,6 +85,8 @@ public class MainActivity extends AppCompatActivity {
             finish();
         } else if(id == R.id.menu_my_cart){
             startActivity(new Intent(MainActivity.this,CartActivity.class));
+        } else if(id == R.id.search){
+            
         }
         return true;
     }

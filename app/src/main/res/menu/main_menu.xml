@@ -2,6 +2,12 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
+        android:id="@+id/search"
+        android:title="Bạn tìm gì hôm nay?"
+        app:showAsAction="always"
+        android:icon="@drawable/ic_baseline_search_24"
+        app:actionViewClass="android.widget.SearchView" />
+    <item
         android:id="@+id/menu_logout"
         android:title="Đăng xuất"
         android:icon="@drawable/ic_baseline_loginout"
