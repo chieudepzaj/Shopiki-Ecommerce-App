@@ -54,7 +54,7 @@ public class PopularProductsAdapter extends RecyclerView.Adapter<PopularProducts
 
     @Override
     public int getItemCount() {
-        return popularProductsModelList.size();
+        return popularProductsModelList.size() > 4 ? 4 : popularProductsModelList.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {

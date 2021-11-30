@@ -13,4 +13,10 @@ public class Constant {
             "Giày Nam",
             "Sách"
     };
+    //event product
+    public static final String[] event = {
+            "Hôm Nay Có Gì Hot",
+            "Xu Hướng Mua Sắm",
+            "Gợi Ý Hôm Nay"
+    };
 }

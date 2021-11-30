@@ -78,7 +78,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
-        
+
         if(id == R.id.menu_logout){
             auth.signOut();
             startActivity(new Intent(MainActivity.this,RegistrationActivity.class));
@@ -86,7 +86,7 @@ public class MainActivity extends AppCompatActivity {
         } else if(id == R.id.menu_my_cart){
             startActivity(new Intent(MainActivity.this,CartActivity.class));
         } else if(id == R.id.search){
-            
+
         }
         return true;
     }

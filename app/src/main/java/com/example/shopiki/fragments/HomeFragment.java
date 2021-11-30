@@ -28,6 +28,9 @@ import com.denzcoskun.imageslider.constants.ScaleTypes;
 import com.denzcoskun.imageslider.models.SlideModel;
 import com.example.shopiki.R;
 import com.example.shopiki.activities.ShowAllActivity;
+import com.example.shopiki.activities.ShowAllNewActivity;
+import com.example.shopiki.activities.ShowAllPopularActivity;
+import com.example.shopiki.activities.ShowAllSuggestActivity;
 import com.example.shopiki.adapters.CategoryAdapter;
 import com.example.shopiki.adapters.NewProductsAdapter;
 import com.example.shopiki.adapters.PopularProductsAdapter;
@@ -50,7 +53,7 @@ import java.util.List;
 
 public class HomeFragment extends Fragment {
 
-    TextView catshowAll,newproductShowAll,popularproductShowAll,suggestProductShowAll;
+    TextView newproductShowAll,popularproductShowAll,suggestProductShowAll;
 
     LinearLayout linearLayout;
     ProgressDialog progressDialog;
@@ -95,24 +98,17 @@ public class HomeFragment extends Fragment {
         trendProductRecyclerview = root.findViewById(R.id.popular_rec);
         suggestProductRecyclerview = root.findViewById(R.id.suggest_product_rec);
 
-        catshowAll = root.findViewById(R.id.category_see_all);
+
         newproductShowAll = root.findViewById(R.id.newProducts_see_all);
         popularproductShowAll = root.findViewById(R.id.popular_see_all);
         suggestProductShowAll = root.findViewById(R.id.suggestProducts_see_all);
 
 
-        catshowAll.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getContext(), ShowAllActivity.class);
-                startActivity(intent);
-            }
-        });
 
         newproductShowAll.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getContext(), ShowAllActivity.class);
+                Intent intent = new Intent(getContext(), ShowAllNewActivity.class);
                 startActivity(intent);
             }
         });
@@ -120,7 +116,7 @@ public class HomeFragment extends Fragment {
         popularproductShowAll.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getContext(), ShowAllActivity.class);
+                Intent intent = new Intent(getContext(), ShowAllPopularActivity.class);
                 startActivity(intent);
             }
         });
@@ -128,7 +124,7 @@ public class HomeFragment extends Fragment {
         suggestProductShowAll.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getContext(), ShowAllActivity.class);
+                Intent intent = new Intent(getContext(), ShowAllSuggestActivity.class);
                 startActivity(intent);
             }
         });

@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_marginTop="40dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".fragments.HomeFragment">
 
@@ -57,18 +58,6 @@
                 android:textSize="17sp"
                 android:textStyle="bold" />
 
-            <TextView
-                android:id="@+id/category_see_all"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="8dp"
-                android:layout_weight="1"
-                android:fontFamily="@font/shopee2021regular"
-                android:gravity="end"
-                android:text="Xem Thêm"
-                android:textColor="@color/shoppecolor"
-                android:textSize="17sp"
-                android:textStyle="normal" />
 
         </LinearLayout>
 

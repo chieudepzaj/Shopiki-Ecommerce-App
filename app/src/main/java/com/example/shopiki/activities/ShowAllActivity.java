@@ -70,8 +70,24 @@ public class ShowAllActivity extends AppCompatActivity {
                         }
                     });
         }
-        if (type != null && type.equalsIgnoreCase("bachhoa")){
-            firestore.collection("ShowAll").whereEqualTo("type","bachhoa")
+        if(type != null && type.equalsIgnoreCase("Tất Cả")) {
+            firestore.collection("ShowAll")
+                    .get()
+                    .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                            if (task.isSuccessful()) {
+                                for (DocumentSnapshot doc : task.getResult().getDocuments()) {
+                                    ShowAllModel showAllModel = doc.toObject(ShowAllModel.class);
+                                    showAllModelList.add(showAllModel);
+                                    showAllAdapter.notifyDataSetChanged();
+                                }
+                            }
+                        }
+                    });
+        }
+        if (type != null && type.equalsIgnoreCase("Bách Hóa")){
+            firestore.collection("ShowAll").whereEqualTo("type","Bách Hóa")
                     .get()
                     .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                         @Override
@@ -86,8 +102,8 @@ public class ShowAllActivity extends AppCompatActivity {
                         }
                     });
         }
-        if (type != null && type.equalsIgnoreCase("electronic")){
-            firestore.collection("ShowAll").whereEqualTo("type","electronic")
+        if (type != null && type.equalsIgnoreCase("Điện Tử")){
+            firestore.collection("ShowAll").whereEqualTo("type","Điện Tử")
                     .get()
                     .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                         @Override
@@ -102,8 +118,8 @@ public class ShowAllActivity extends AppCompatActivity {
                         }
                     });
         }
-        if (type != null && type.equalsIgnoreCase("camera")){
-            firestore.collection("ShowAll").whereEqualTo("type","camera")
+        if (type != null && type.equalsIgnoreCase("Thiết Bị Số")){
+            firestore.collection("ShowAll").whereEqualTo("type","Thiết Bị Số")
                     .get()
                     .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                         @Override
@@ -118,8 +134,8 @@ public class ShowAllActivity extends AppCompatActivity {
                         }
                     });
         }
-        if (type != null && type.equalsIgnoreCase("fashion")){
-            firestore.collection("ShowAll").whereEqualTo("type","fashion")
+        if (type != null && type.equalsIgnoreCase("Thời Trang Nam")){
+            firestore.collection("ShowAll").whereEqualTo("type","Thời Trang Nam")
                     .get()
                     .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                         @Override
@@ -134,8 +150,8 @@ public class ShowAllActivity extends AppCompatActivity {
                         }
                     });
         }
-        if (type != null && type.equalsIgnoreCase("mobiles")){
-            firestore.collection("ShowAll").whereEqualTo("type","mobiles")
+        if (type != null && type.equalsIgnoreCase("Điện Thoại")){
+            firestore.collection("ShowAll").whereEqualTo("type","Điện Thoại")
                     .get()
                     .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                         @Override
@@ -150,8 +166,8 @@ public class ShowAllActivity extends AppCompatActivity {
                         }
                     });
         }
-        if (type != null && type.equalsIgnoreCase("thoitrangnu")){
-            firestore.collection("ShowAll").whereEqualTo("type","thoitrangnu")
+        if (type != null && type.equalsIgnoreCase("Thời Trang Nữ")){
+            firestore.collection("ShowAll").whereEqualTo("type","Thời Trang Nữ")
                     .get()
                     .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                         @Override
@@ -166,8 +182,8 @@ public class ShowAllActivity extends AppCompatActivity {
                         }
                     });
         }
-        if (type != null && type.equalsIgnoreCase("shoes")){
-            firestore.collection("ShowAll").whereEqualTo("type","shoes")
+        if (type != null && type.equalsIgnoreCase("Giày Nam")){
+            firestore.collection("ShowAll").whereEqualTo("type","Giày Nam")
                     .get()
                     .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                         @Override
@@ -182,8 +198,8 @@ public class ShowAllActivity extends AppCompatActivity {
                         }
                     });
         }
-        if (type != null && type.equalsIgnoreCase("Book")){
-            firestore.collection("ShowAll").whereEqualTo("type","Book")
+        if (type != null && type.equalsIgnoreCase("Sách")){
+            firestore.collection("ShowAll").whereEqualTo("type","Sách")
                     .get()
                     .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                         @Override

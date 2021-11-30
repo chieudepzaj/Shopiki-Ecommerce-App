@@ -51,7 +51,7 @@ public class AddProductActivity extends AppCompatActivity {
     //ui views
     private Button addproduct;
     private ImageView imageView;
-    private TextView category;
+    private TextView category,event;
     private EditText name,price,rating,description;
     // permission image
     private static final int CAMERA_REQUEST_CODE = 200;
@@ -69,7 +69,7 @@ public class AddProductActivity extends AppCompatActivity {
     private FirebaseAuth auth;
     private UploadTask uploadTask;
 
-    int inputprice;
+    int inputprice,type;
 
 
     @Override
@@ -83,6 +83,7 @@ public class AddProductActivity extends AppCompatActivity {
         //ui add product
         addproduct = findViewById(R.id.add_product);
         category = findViewById(R.id.add_category_product);
+        event = findViewById(R.id.add_type_product);
         name = findViewById(R.id.add_name_product);
         description = findViewById(R.id.add_desc_product);
         price = findViewById(R.id.add_price_product);
@@ -119,6 +120,13 @@ public class AddProductActivity extends AppCompatActivity {
             }
         });
 
+        event.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                eventDialog();
+            }
+        });
+
         addproduct.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -129,8 +137,10 @@ public class AddProductActivity extends AppCompatActivity {
 
     }
 
-    private String productname,productrating,productDescription,productprice,productcategory;
-
+    private String productname,productrating,productDescription,productprice,productcategory,eventtype;
+    private String event1 = "Hôm Nay Có Gì Hot";
+    private String event2 = "Xu Hướng Mua Sắm";
+    private String event3 = "Gợi Ý Hôm Nay";
     private void inputData() {
         productname = name.getText().toString().trim();
         productDescription = description.getText().toString().trim();
@@ -139,6 +149,7 @@ public class AddProductActivity extends AppCompatActivity {
         productrating = rating.getText().toString().trim();
         inputprice = Integer.parseInt(price.getText().toString().trim());
         double ratingstar = Double.parseDouble(productrating);
+        eventtype = event.getText().toString().trim();
         //check input
         if (TextUtils.isEmpty(productname)) {
             Toast.makeText(this, "Nhập tên sản phẩm!", Toast.LENGTH_SHORT).show();
@@ -163,6 +174,15 @@ public class AddProductActivity extends AppCompatActivity {
         if(ratingstar < 0 || ratingstar > 5){
             Toast.makeText(this, "Nhập đánh giá sản phẩm từ 0-5!", Toast.LENGTH_SHORT).show();
             return;
+        }
+        if (eventtype.equalsIgnoreCase(event1)){
+            type = 1;
+        }
+        if (eventtype.equalsIgnoreCase(event2)){
+            type = 2;
+        }
+        if (eventtype.equalsIgnoreCase(event3)){
+            type = 3;
         }
         addProduct();
 
@@ -197,15 +217,44 @@ public class AddProductActivity extends AppCompatActivity {
                                             cartMap.put("description",description.getText().toString());
                                             cartMap.put("rating",rating.getText().toString());
                                             cartMap.put("img_url",imageUrl);
+                                            cartMap.put("type",category.getText().toString());
 
-                                            db.collection("AllProducts").add(cartMap).addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
+                                            db.collection("ShowAll").add(cartMap).addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
                                                 @Override
                                                 public void onComplete(@NonNull Task<DocumentReference> task) {
-                                                    progressDialog.dismiss();
-                                                    Toast.makeText(AddProductActivity.this, "Đã thêm sản phẩm mới", Toast.LENGTH_SHORT).show();
-                                                    clearData();
+
                                                 }
                                             });
+                                            if (type == 1){
+                                                db.collection("NewProducts").add(cartMap).addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
+                                                    @Override
+                                                    public void onComplete(@NonNull Task<DocumentReference> task) {
+                                                        progressDialog.dismiss();
+                                                        Toast.makeText(AddProductActivity.this, "Đã thêm sản phẩm mới", Toast.LENGTH_SHORT).show();
+                                                        clearData();
+                                                    }
+                                                });
+                                            }
+                                            if (type == 2){
+                                                db.collection("PopularProducts").add(cartMap).addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
+                                                    @Override
+                                                    public void onComplete(@NonNull Task<DocumentReference> task) {
+                                                        progressDialog.dismiss();
+                                                        Toast.makeText(AddProductActivity.this, "Đã thêm sản phẩm mới", Toast.LENGTH_SHORT).show();
+                                                        clearData();
+                                                    }
+                                                });
+                                            }
+                                            if (type == 3){
+                                                db.collection("SuggestProducts").add(cartMap).addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
+                                                    @Override
+                                                    public void onComplete(@NonNull Task<DocumentReference> task) {
+                                                        progressDialog.dismiss();
+                                                        Toast.makeText(AddProductActivity.this, "Đã thêm sản phẩm mới", Toast.LENGTH_SHORT).show();
+                                                        clearData();
+                                                    }
+                                                });
+                                            }
                                         }
                                     });
                                 }
@@ -254,6 +303,20 @@ public class AddProductActivity extends AppCompatActivity {
                     public void onClick(DialogInterface dialogInterface, int i) {
                         String categorytv = Constant.option[i];
                         category.setText(categorytv);
+
+                    }
+                })
+                .show();
+    }
+
+    private void eventDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Danh mục sự kiện")
+                .setItems(Constant.event, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        String categorytv = Constant.event[i];
+                        event.setText(categorytv);
 
                     }
                 })

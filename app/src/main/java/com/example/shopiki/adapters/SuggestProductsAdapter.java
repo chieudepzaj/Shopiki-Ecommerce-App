@@ -54,7 +54,7 @@ public class SuggestProductsAdapter extends RecyclerView.Adapter<SuggestProducts
 
     @Override
     public int getItemCount() {
-        return suggestProductsModelList.size();
+        return suggestProductsModelList.size() > 4 ? 4 : suggestProductsModelList.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
