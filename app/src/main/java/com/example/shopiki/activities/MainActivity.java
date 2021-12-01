@@ -71,6 +71,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             loadFragment(contractFragment);
             navigationView.getMenu().findItem(R.id.nav_contract).setChecked(true);
         }else if(id == R.id.nav_cart){
+//            startActivity(new Intent(MainActivity.this,CartActivity.class));
             loadFragment(cartFragment);
         } else if(id == R.id.nav_logout){
             auth.signOut();
@@ -82,10 +83,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             Toast.makeText(this, "Chức năng chưa được phát triển.", Toast.LENGTH_SHORT).show();
         } else if (id == R.id.nav_profile){
             loadFragment(new ProfileFragment());
-            navigationView.getMenu().findItem(R.id.nav_profile).setChecked(true);
         } else if(id == R.id.nav_share){
             loadFragment(new PolicyFrangment());
-            navigationView.getMenu().findItem(R.id.nav_share).setChecked(true);
         }
         mDrawerLayout.closeDrawer(GravityCompat.START);
         return true;

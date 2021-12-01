@@ -67,6 +67,7 @@
         android:elevation="3dp"
         android:fontFamily="@font/shopee2021regular"
         android:hint="Số Điện Thoại"
+        android:inputType="phone"
         android:padding="13dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -92,7 +93,7 @@
         app:layout_constraintWidth_percent=".8" />
 
     <Button
-        android:id="@+id/add_product"
+        android:id="@+id/update_profile"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
