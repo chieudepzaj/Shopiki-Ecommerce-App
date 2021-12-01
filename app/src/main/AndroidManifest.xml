@@ -32,7 +32,7 @@
             android:name=".activities.AdminLoginActivity"
             android:exported="false" />
         <activity
-            android:name=".activities.CartActivity"
+            android:name=".fragments.CartFragment"
             android:exported="false" />
         <activity
             android:name=".activities.ShowAllActivity"

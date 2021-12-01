@@ -1,44 +1,56 @@
 package com.example.shopiki.activities;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.view.MenuItemCompat;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
-import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.SearchView;
+import android.widget.Toast;
 
 import androidx.appcompat.widget.Toolbar;
 
 import com.example.shopiki.R;
+import com.example.shopiki.fragments.CartFragment;
+import com.example.shopiki.fragments.ContractFrangment;
 import com.example.shopiki.fragments.HomeFragment;
+import com.example.shopiki.fragments.PolicyFrangment;
+import com.example.shopiki.fragments.ProfileFragment;
+import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.firestore.FirebaseFirestore;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
-    Fragment homeFragment;
+    Fragment homeFragment,contractFragment,cartFragment;
     Toolbar toolbar;
     FirebaseAuth auth;
-
+    private DrawerLayout mDrawerLayout;
+    private NavigationView navigationView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        mDrawerLayout = findViewById(R.id.drawer_layout);
         auth = FirebaseAuth.getInstance();
-        toolbar = findViewById(R.id.home_toolbar);
+        toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_baseline_menu_24);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this,mDrawerLayout,toolbar,R.string.navigation_drawer_open,R.string.navigation_drawer_close);
+        mDrawerLayout.addDrawerListener(toggle);
+        toggle.syncState();
+
+        navigationView = findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(this);
+
         homeFragment = new HomeFragment();
         loadFragment(homeFragment);
+        contractFragment = new ContractFrangment();
+        cartFragment = new CartFragment();
     }
 
 
@@ -50,44 +62,41 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.main_menu,menu);
-        MenuItem item = menu.findItem(R.id.search);
-        SearchView searchView = (SearchView) MenuItemCompat.getActionView(item);
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String s) {
-                searchData(s);
-                return false;
-            }
-
-            @Override
-            public boolean onQueryTextChange(String s) {
-                return false;
-            }
-        });
-
-        return true;
-    }
-
-    private void searchData(String s) {
-
-
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
-
-        if(id == R.id.menu_logout){
+        if(id == R.id.nav_home){
+            loadFragment(homeFragment);
+        }
+        else if (id == R.id.nav_contract){
+            loadFragment(contractFragment);
+            navigationView.getMenu().findItem(R.id.nav_contract).setChecked(true);
+        }else if(id == R.id.nav_cart){
+            loadFragment(cartFragment);
+        } else if(id == R.id.nav_logout){
             auth.signOut();
             startActivity(new Intent(MainActivity.this,RegistrationActivity.class));
             finish();
-        } else if(id == R.id.menu_my_cart){
-            startActivity(new Intent(MainActivity.this,CartActivity.class));
-        } else if(id == R.id.search){
-
+        } else if(id == R.id.nav_refesh){
+            startActivity(new Intent(MainActivity.this, MainActivity.class));
+        } else if (id == R.id.nav_wishlist){
+            Toast.makeText(this, "Chức năng chưa được phát triển.", Toast.LENGTH_SHORT).show();
+        } else if (id == R.id.nav_profile){
+            loadFragment(new ProfileFragment());
+            navigationView.getMenu().findItem(R.id.nav_profile).setChecked(true);
+        } else if(id == R.id.nav_share){
+            loadFragment(new PolicyFrangment());
+            navigationView.getMenu().findItem(R.id.nav_share).setChecked(true);
         }
+        mDrawerLayout.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    @Override
+    public void onBackPressed() {
+        if(mDrawerLayout.isDrawerOpen(GravityCompat.START)){
+            mDrawerLayout.closeDrawer(GravityCompat.START);
+        } else {
+            super.onBackPressed();
+        }
     }
 }

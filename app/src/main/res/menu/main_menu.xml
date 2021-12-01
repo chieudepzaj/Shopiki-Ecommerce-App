@@ -56,29 +56,12 @@
             <item
                 android:id="@+id/nav_share"
                 android:icon="@drawable/baseline_gavel_24"
-                android:title="The Term Of Use" />
+                android:title="Chính Sách Bảo Mật" />
 
             <item
                 android:id="@+id/nav_contract"
-                android:icon="@drawable/baseline_contacts_24"
-                android:title="About me" />
+                android:icon="@drawable/ic_baseline_mail_outline_24"
+                android:title="Phản Hồi" />
         </menu>
     </item>
-
-    <item
-        android:id="@+id/search"
-        android:icon="@drawable/ic_baseline_search_24"
-        android:title="Bạn tìm gì hôm nay?"
-        app:actionViewClass="android.widget.SearchView"
-        app:showAsAction="never" />
-    <item
-        android:id="@+id/menu_logout"
-        android:icon="@drawable/ic_baseline_loginout"
-        android:title="Đăng xuất"
-        app:showAsAction="always" />
-    <item
-        android:id="@+id/menu_my_cart"
-        android:icon="@drawable/mycart"
-        android:title="Giỏ Hàng"
-        app:showAsAction="always" />
 </menu>

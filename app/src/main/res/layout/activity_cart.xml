@@ -5,19 +5,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#C6C6C6"
-    tools:context=".activities.CartActivity">
+    tools:context=".fragments.CartFragment">
 
-    <androidx.appcompat.widget.Toolbar
+    <TextView
         android:id="@+id/my_cart_toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        android:background="@color/red"
-        android:minHeight="?attr/actionBarSize"
-        android:theme="?attr/actionBarTheme"
-        app:title="Giỏ Hàng" />
+        android:text="" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="0dp"

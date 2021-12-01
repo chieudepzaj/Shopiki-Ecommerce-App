@@ -19,4 +19,10 @@ public class Constant {
             "Xu Hướng Mua Sắm",
             "Gợi Ý Hôm Nay"
     };
+    //type contract
+    public static final String[] contract = {
+            "Bản Quyền",
+            "Hỗ Trợ Ứng Dụng",
+            "Khác"
+    };
 }
