@@ -20,6 +20,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.denzcoskun.imageslider.ImageSlider;
+import com.denzcoskun.imageslider.constants.ScaleTypes;
+import com.denzcoskun.imageslider.models.SlideModel;
 import com.example.shopiki.R;
 import com.example.shopiki.models.NewProductsModel;
 import com.example.shopiki.models.PopularProductsModel;
@@ -32,8 +35,10 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
+import java.util.List;
 
 public class DetailedActivity extends AppCompatActivity {
 
@@ -87,7 +92,7 @@ public class DetailedActivity extends AppCompatActivity {
             showAllModel = (ShowAllModel) obj;
         }
 
-        detailedImg = findViewById(R.id.detailed_img);
+//        detailedImg = findViewById(R.id.detailed_img);
         quantity = findViewById(R.id.quantity);
         name = findViewById(R.id.detailed_name);
         rating = findViewById(R.id.rating);
@@ -103,9 +108,17 @@ public class DetailedActivity extends AppCompatActivity {
         stars.getDrawable(2).setColorFilter(Color.parseColor("#ffbe1a"), PorterDuff.Mode.SRC_ATOP);
         stars.getDrawable(0).setColorFilter(Color.parseColor("#ffbe1a"), PorterDuff.Mode.SRC_ATOP);
         stars.getDrawable(1).setColorFilter(Color.parseColor("#ffbe1a"), PorterDuff.Mode.SRC_ATOP);
+        //image slider
+        ImageSlider imageSlider = findViewById(R.id.detailed_img);
+        List<SlideModel> slideModels = new ArrayList<>();
+
         //New Products
         if(newProductsModel != null){
-            Glide.with(getApplicationContext()).load(newProductsModel.getImg_url()).into(detailedImg);
+            slideModels.add(new SlideModel(newProductsModel.getImg_url(),ScaleTypes.CENTER_INSIDE));
+            slideModels.add(new SlideModel(newProductsModel.getImg_url1(),ScaleTypes.CENTER_INSIDE));
+            slideModels.add(new SlideModel(newProductsModel.getImg_url2(),ScaleTypes.CENTER_INSIDE));
+            slideModels.add(new SlideModel(newProductsModel.getImg_url3(),ScaleTypes.CENTER_INSIDE));
+            imageSlider.setImageList(slideModels);
             name.setText(newProductsModel.getName());
             rating.setText(newProductsModel.getRating());
             description.setText(newProductsModel.getDescription());
@@ -118,7 +131,11 @@ public class DetailedActivity extends AppCompatActivity {
         }
         //Popular Products
         if(popularProductsModel != null){
-            Glide.with(getApplicationContext()).load(popularProductsModel.getImg_url()).into(detailedImg);
+            slideModels.add(new SlideModel(popularProductsModel.getImg_url(),ScaleTypes.CENTER_INSIDE));
+            slideModels.add(new SlideModel(popularProductsModel.getImg_url1(),ScaleTypes.CENTER_INSIDE));
+            slideModels.add(new SlideModel(popularProductsModel.getImg_url2(),ScaleTypes.CENTER_INSIDE));
+            slideModels.add(new SlideModel(popularProductsModel.getImg_url3(),ScaleTypes.CENTER_INSIDE));
+            imageSlider.setImageList(slideModels);
             name.setText(popularProductsModel.getName());
             rating.setText(popularProductsModel.getRating());
             description.setText(popularProductsModel.getDescription());
@@ -158,7 +175,13 @@ public class DetailedActivity extends AppCompatActivity {
         addToCart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                addToCart();
+                if(auth.getCurrentUser() != null) {
+                    addToCart();
+                } else{
+                    Toast.makeText(DetailedActivity.this, "Vui lòng đăng nhập để thực hiện chức năng.", Toast.LENGTH_SHORT).show();
+                    startActivity(new Intent(DetailedActivity.this, LoginActivity.class));
+                    finish();
+                }
             }
         });
         chat.setOnClickListener(new View.OnClickListener() {

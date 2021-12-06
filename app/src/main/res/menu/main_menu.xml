@@ -42,6 +42,11 @@
                     android:icon="@drawable/baseline_logout_24"
                     android:title="Đăng Xuất" />
 
+                <item
+                    android:id="@+id/nav_login"
+                    android:icon="@drawable/baseline_logout_24"
+                    android:title="Đăng Xuất" />
+
             </menu>
 
 

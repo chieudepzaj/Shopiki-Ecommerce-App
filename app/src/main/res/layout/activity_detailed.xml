@@ -7,41 +7,45 @@
     tools:context=".activities.DetailedActivity">
 
 
-    <ImageView
+    <com.denzcoskun.imageslider.ImageSlider
         android:id="@+id/detailed_img"
         android:layout_width="match_parent"
-        android:layout_height="250dp"
+        android:layout_height="480dp"
+        app:iss_auto_cycle="true"
+        app:iss_delay="0"
+        app:iss_period="1500"
+        app:layout_constraintBottom_toTopOf="@+id/cardview"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:src="@drawable/ic_launcher_background"
-        android:scaleType="centerInside"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/detailed_toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         app:title=" " />
 
     <androidx.cardview.widget.CardView
-        android:translationY="-50dp"
         android:id="@+id/cardview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="122dp"
         android:elevation="10dp"
+        android:translationY="-50dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/detailed_img">
+        app:layout_constraintTop_toBottomOf="@+id/detailed_img">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical"
             android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp">
+            android:layout_marginRight="20dp"
+            android:orientation="vertical">
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -63,35 +67,35 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="left">
+                android:gravity="left"
+                android:orientation="horizontal">
 
                 <TextView
                     android:id="@+id/detailed_price"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="20"
-                    android:textSize="20sp"
-                    android:textStyle="normal"
                     android:fontFamily="@font/shopee2021regular"
-                    android:textColor="@color/red"/>
+                    android:text="20"
+                    android:textColor="@color/red"
+                    android:textSize="20sp"
+                    android:textStyle="normal" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text=" ₫"
-                    android:textSize="20sp"
-                    android:textStyle="normal"
                     android:fontFamily="@font/shopee2021regular"
-                    android:textColor="@color/red"/>
+                    android:text=" ₫"
+                    android:textColor="@color/red"
+                    android:textSize="20sp"
+                    android:textStyle="normal" />
 
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="left">
+                android:gravity="left"
+                android:orientation="horizontal">
 
                 <RatingBar
                     android:id="@+id/my_rating"
@@ -108,8 +112,8 @@
                     android:id="@+id/rating"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
                     android:layout_marginLeft="3dp"
+                    android:layout_marginTop="8dp"
                     android:layout_toStartOf="@+id/my_rating"
                     android:fontFamily="@font/shopee2021regular"
                     android:text="4.0"
@@ -157,7 +161,7 @@
 
             <ScrollView
                 android:layout_width="match_parent"
-                android:layout_height="180dp">
+                android:layout_height="150dp">
 
                 <TextView
                     android:id="@+id/detailed_desc"
@@ -169,12 +173,11 @@
             </ScrollView>
 
 
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="10dp">
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -186,31 +189,33 @@
                     android:textColor="@color/black"
                     android:textSize="16sp"
                     android:textStyle="normal" />
+
                 <ImageView
-                    android:layout_marginRight="7dp"
-                    android:layout_marginTop="5dp"
+                    android:id="@+id/remove_item"
                     android:layout_width="18dp"
                     android:layout_height="20dp"
                     android:layout_marginLeft="190dp"
-                    android:src="@drawable/iconminus"
-                    android:id="@+id/remove_item" />
+                    android:layout_marginTop="5dp"
+                    android:layout_marginRight="7dp"
+                    android:src="@drawable/iconminus" />
 
                 <TextView
                     android:id="@+id/quantity"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="1"
-                    android:textSize="20sp"
-                    android:textColor="@color/shoppecolor"
                     android:fontFamily="@font/shopee2021regular"
-                    android:textStyle="bold"/>
+                    android:text="1"
+                    android:textColor="@color/shoppecolor"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
                 <ImageView
-                    android:layout_marginLeft="7dp"
-                    android:layout_marginTop="5dp"
+                    android:id="@+id/add_item"
                     android:layout_width="20dp"
                     android:layout_height="20dp"
-                    android:src="@drawable/plusicon"
-                    android:id="@+id/add_item"/>
+                    android:layout_marginLeft="7dp"
+                    android:layout_marginTop="5dp"
+                    android:src="@drawable/plusicon" />
             </LinearLayout>
 
         </LinearLayout>
@@ -220,58 +225,59 @@
         android:id="@+id/chat"
         android:layout_width="80dp"
         android:layout_height="wrap_content"
-        android:padding="14dp"
-        android:text=" "
-        android:textColor="@color/red_real"
-        app:icon="@drawable/ic_baseline_chat_24"
-        app:iconPadding="0dp"
-        app:iconGravity="textStart"
-        app:iconTint="@color/red_real"
-        app:strokeColor="@color/red_real"
-        app:strokeWidth="2dp"
-        android:backgroundTint="@color/white"
-        android:textAllCaps="false"
         android:layout_marginLeft="3dp"
         android:layout_marginRight="2dp"
+        android:backgroundTint="@color/white"
+        android:padding="14dp"
+        android:text=" "
+        android:textAllCaps="false"
+        android:textColor="@color/red_real"
+        app:icon="@drawable/ic_baseline_chat_24"
+        app:iconGravity="textStart"
+        app:iconPadding="0dp"
+        app:iconTint="@color/red_real"
         app:layout_constraintBottom_toBottomOf="@+id/add_to_card"
         app:layout_constraintEnd_toStartOf="@+id/add_to_card"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/add_to_card"
-        app:layout_constraintWidth_percent=".5" />
+        app:layout_constraintWidth_percent=".5"
+        app:strokeColor="@color/red_real"
+        app:strokeWidth="2dp" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/add_to_card"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="77dp"
+        android:backgroundTint="@color/white"
         android:fontFamily="@font/shopee2021regular"
         android:padding="14dp"
         android:text=" "
+        android:textAllCaps="false"
         app:icon="@drawable/ic_baseline_add_shopping_cart_24"
         app:iconGravity="textStart"
         app:iconPadding="0dp"
         app:iconTint="@color/red_real"
-        app:strokeColor="@color/red_real"
-        app:strokeWidth="2dp"
-        android:backgroundTint="@color/white"
-        android:textAllCaps="false"
-        android:layout_marginLeft="77dp"
         app:layout_constraintBottom_toBottomOf="@+id/buy_now"
         app:layout_constraintEnd_toStartOf="@+id/buy_now"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/buy_now"
-        app:layout_constraintWidth_percent=".5" />
+        app:layout_constraintWidth_percent=".5"
+        app:strokeColor="@color/red_real"
+        app:strokeWidth="2dp" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/buy_now"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="165dp"
+        android:backgroundTint="@color/red_real"
         android:fontFamily="@font/shopee2021regular"
         android:padding="14dp"
+        android:layout_marginBottom="37dp"
         android:text="Mua Ngay"
-        android:backgroundTint="@color/red_real"
         android:textAllCaps="false"
         android:textStyle="normal"
-        android:layout_marginLeft="165dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

@@ -9,6 +9,9 @@ public class NewProductsModel implements Serializable {
     String rating;
     int price;
     String img_url;
+    String img_url1;
+    String img_url2;
+    String img_url3;
 
     public NewProductsModel() {
     }
@@ -19,6 +22,33 @@ public class NewProductsModel implements Serializable {
         this.rating = rating;
         this.price = price;
         this.img_url = img_url;
+        this.img_url1 = img_url1;
+        this.img_url2 = img_url2;
+        this.img_url3 = img_url3;
+    }
+
+    public String getImg_url1() {
+        return img_url1;
+    }
+
+    public void setImg_url1(String img_url1) {
+        this.img_url1 = img_url1;
+    }
+
+    public String getImg_url2() {
+        return img_url2;
+    }
+
+    public void setImg_url2(String img_url2) {
+        this.img_url2 = img_url2;
+    }
+
+    public String getImg_url3() {
+        return img_url3;
+    }
+
+    public void setImg_url3(String img_url3) {
+        this.img_url3 = img_url3;
     }
 
     public String getDescription() {

@@ -42,6 +42,7 @@ import com.google.firebase.storage.UploadTask;
 
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 
@@ -49,27 +50,30 @@ public class AddProductActivity extends AppCompatActivity {
 
     Toolbar toolbar;
     //ui views
-    private Button addproduct;
-    private ImageView imageView;
-    private TextView category,event;
-    private EditText name,price,rating,description;
+    private Button addproduct,imageView;
+    private ImageView img1,img2,img3,img4;
+    private TextView category, event;
+    private EditText name, price, rating, description;
     // permission image
     private static final int CAMERA_REQUEST_CODE = 200;
     private static final int STORAGE_REQUEST_CODE = 300;
     //image pick constant
-    private static final int IMAGE_PICK_GALLERY_CODE = 400;
+    private static final int IMAGE_PICK_GALLERY_CODE = 1;
     private static final int IMAGE_PICK_CAMERA_CODE = 500;
     //permission array
     private String[] cameraPermissions;
     private String[] storagePermissions;
     private Uri image_uri;
+    private ArrayList<Uri> image_url = new ArrayList<Uri>();
+    private ArrayList<String> urlImage = new ArrayList<String>();
+    private int upload_count = 0;
     private ProgressDialog progressDialog;
 
     private FirebaseFirestore db;
     private FirebaseAuth auth;
     private UploadTask uploadTask;
 
-    int inputprice,type;
+    int inputprice, type;
 
 
     @Override
@@ -89,6 +93,10 @@ public class AddProductActivity extends AppCompatActivity {
         price = findViewById(R.id.add_price_product);
         rating = findViewById(R.id.add_rating_product);
         imageView = findViewById(R.id.img_icon);
+        img1 = findViewById(R.id.img_name_1);
+        img2 = findViewById(R.id.img_name_2);
+        img3 = findViewById(R.id.img_name_3);
+        img4 = findViewById(R.id.img_name_4);
         // toolbar
         toolbar = findViewById(R.id.add_product_toolbar);
         setSupportActionBar(toolbar);
@@ -103,7 +111,7 @@ public class AddProductActivity extends AppCompatActivity {
 
 
         //init permission array
-        cameraPermissions = new String[]{Manifest.permission.CAMERA,Manifest.permission.WRITE_EXTERNAL_STORAGE};
+        cameraPermissions = new String[]{Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE};
         storagePermissions = new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE};
 
         imageView.setOnClickListener(new View.OnClickListener() {
@@ -137,10 +145,11 @@ public class AddProductActivity extends AppCompatActivity {
 
     }
 
-    private String productname,productrating,productDescription,productprice,productcategory,eventtype;
+    private String productname, productrating, productDescription, productprice, productcategory, eventtype;
     private String event1 = "Hôm Nay Có Gì Hot";
     private String event2 = "Xu Hướng Mua Sắm";
     private String event3 = "Gợi Ý Hôm Nay";
+
     private void inputData() {
         productname = name.getText().toString().trim();
         productDescription = description.getText().toString().trim();
@@ -171,17 +180,17 @@ public class AddProductActivity extends AppCompatActivity {
             Toast.makeText(this, "Hãy chọn danh mục của sản phẩm!", Toast.LENGTH_SHORT).show();
             return;
         }
-        if(ratingstar < 0 || ratingstar > 5){
+        if (ratingstar < 0 || ratingstar > 5) {
             Toast.makeText(this, "Nhập đánh giá sản phẩm từ 0-5!", Toast.LENGTH_SHORT).show();
             return;
         }
-        if (eventtype.equalsIgnoreCase(event1)){
+        if (eventtype.equalsIgnoreCase(event1)) {
             type = 1;
         }
-        if (eventtype.equalsIgnoreCase(event2)){
+        if (eventtype.equalsIgnoreCase(event2)) {
             type = 2;
         }
-        if (eventtype.equalsIgnoreCase(event3)){
+        if (eventtype.equalsIgnoreCase(event3)) {
             type = 3;
         }
         addProduct();
@@ -193,97 +202,104 @@ public class AddProductActivity extends AppCompatActivity {
         progressDialog.setCanceledOnTouchOutside(false);
         progressDialog.show();
 
-       String timestamp = "" + System.currentTimeMillis();
-        if(image_uri == null){
-            Toast.makeText(this, "Bạn chưa upload ảnh sản phẩm!", Toast.LENGTH_SHORT).show();
-        }else{
-            String filePathAndName = "products/"+"" + timestamp;
-            StorageReference storageReference = FirebaseStorage.getInstance().getReference(filePathAndName);
-            uploadTask = storageReference.putFile(image_uri);
-            uploadTask.addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                        @Override
-                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                            if(taskSnapshot.getMetadata() != null){
-                                if (taskSnapshot.getMetadata().getReference() != null){
-                                    Task<Uri> result = taskSnapshot.getStorage().getDownloadUrl();
-                                    result.addOnSuccessListener(new OnSuccessListener<Uri>() {
-                                        @Override
-                                        public void onSuccess(Uri uri) {
-                                            String imageUrl = uri.toString();
-                                            //createNewPost(imageUrl);
-                                            final HashMap<String,Object> cartMap = new HashMap<>();
-                                            cartMap.put("name",name.getText().toString());
-                                            cartMap.put("price",inputprice);
-                                            cartMap.put("description",description.getText().toString());
-                                            cartMap.put("rating",rating.getText().toString());
-                                            cartMap.put("img_url",imageUrl);
-                                            cartMap.put("type",category.getText().toString());
 
-                                            db.collection("ShowAll").add(cartMap).addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
+        for (upload_count = 0; upload_count < image_url.size(); upload_count++) {
+            String timestamp = "" + System.currentTimeMillis();
+            String filePathAndName = "products/" + "" + timestamp;
+            StorageReference storageReference = FirebaseStorage.getInstance().getReference(filePathAndName);
+            Uri IndividualImage = image_url.get(upload_count);
+            uploadTask = storageReference.putFile(IndividualImage);
+            uploadTask.addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                @Override
+                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                    if (taskSnapshot.getMetadata() != null) {
+                        if (taskSnapshot.getMetadata().getReference() != null) {
+                            Task<Uri> result = taskSnapshot.getStorage().getDownloadUrl();
+                            result.addOnSuccessListener(new OnSuccessListener<Uri>() {
+                                @Override
+                                public void onSuccess(Uri uri) {
+                                    String imageUrl = uri.toString();
+                                    urlImage.add(imageUrl);
+                                    if (urlImage.size() == image_url.size()){
+                                        //createNewPost(imageUrl);
+                                        final HashMap<String,Object> cartMap = new HashMap<>();
+                                        cartMap.put("name",name.getText().toString());
+                                        cartMap.put("price",inputprice);
+                                        cartMap.put("description",description.getText().toString());
+                                        cartMap.put("rating",rating.getText().toString());
+                                        cartMap.put("type",category.getText().toString());
+                                        for (int i = 0; i <urlImage.size() ; i++) {
+                                            if(i == 0){
+                                                cartMap.put("img_url", urlImage.get(i));
+                                            } else{
+                                                cartMap.put("img_url"+i, urlImage.get(i));
+                                            }
+
+                                        }
+
+
+                                        db.collection("ShowAll").add(cartMap).addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
+                                            @Override
+                                            public void onComplete(@NonNull Task<DocumentReference> task) {
+
+                                            }
+                                        });
+                                        if (type == 1){
+                                            db.collection("NewProducts").add(cartMap).addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
                                                 @Override
                                                 public void onComplete(@NonNull Task<DocumentReference> task) {
-
+                                                    progressDialog.dismiss();
+                                                    Toast.makeText(AddProductActivity.this, "Đã thêm sản phẩm mới", Toast.LENGTH_SHORT).show();
+                                                    clearData();
                                                 }
                                             });
-                                            if (type == 1){
-                                                db.collection("NewProducts").add(cartMap).addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
-                                                    @Override
-                                                    public void onComplete(@NonNull Task<DocumentReference> task) {
-                                                        progressDialog.dismiss();
-                                                        Toast.makeText(AddProductActivity.this, "Đã thêm sản phẩm mới", Toast.LENGTH_SHORT).show();
-                                                        clearData();
-                                                    }
-                                                });
-                                            }
-                                            if (type == 2){
-                                                db.collection("PopularProducts").add(cartMap).addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
-                                                    @Override
-                                                    public void onComplete(@NonNull Task<DocumentReference> task) {
-                                                        progressDialog.dismiss();
-                                                        Toast.makeText(AddProductActivity.this, "Đã thêm sản phẩm mới", Toast.LENGTH_SHORT).show();
-                                                        clearData();
-                                                    }
-                                                });
-                                            }
-                                            if (type == 3){
-                                                db.collection("SuggestProducts").add(cartMap).addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
-                                                    @Override
-                                                    public void onComplete(@NonNull Task<DocumentReference> task) {
-                                                        progressDialog.dismiss();
-                                                        Toast.makeText(AddProductActivity.this, "Đã thêm sản phẩm mới", Toast.LENGTH_SHORT).show();
-                                                        clearData();
-                                                    }
-                                                });
-                                            }
                                         }
-                                    });
+                                        if (type == 2){
+                                            db.collection("PopularProducts").add(cartMap).addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
+                                                @Override
+                                                public void onComplete(@NonNull Task<DocumentReference> task) {
+                                                    progressDialog.dismiss();
+                                                    Toast.makeText(AddProductActivity.this, "Đã thêm sản phẩm mới", Toast.LENGTH_SHORT).show();
+                                                    clearData();
+                                                }
+                                            });
+                                        }
+                                        if (type == 3){
+                                            db.collection("SuggestProducts").add(cartMap).addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
+                                                @Override
+                                                public void onComplete(@NonNull Task<DocumentReference> task) {
+                                                    progressDialog.dismiss();
+                                                    Toast.makeText(AddProductActivity.this, "Đã thêm sản phẩm mới", Toast.LENGTH_SHORT).show();
+                                                    clearData();
+                                                }
+                                            });
+                                        }
+                                    }
                                 }
-                            }
-
-
-
-
-
+                            });
                         }
-                    })
+                    }
+
+
+                }
+            })
                     .addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
                         @Override
                         public void onProgress(@NonNull UploadTask.TaskSnapshot snapshot) {
-                            double progress = (100* snapshot.getBytesTransferred())/snapshot.getTotalByteCount();
-                            progressDialog.setMessage("Đang tải " +(int)progress+" %");
+                            double progress = (100 * snapshot.getBytesTransferred()) / snapshot.getTotalByteCount();
+                            progressDialog.setMessage("Đang tải ảnh " + (upload_count ) + " " + (int) progress + " %");
                         }
                     })
                     .addOnFailureListener(new OnFailureListener() {
                         @Override
                         public void onFailure(@NonNull Exception e) {
                             progressDialog.dismiss();
-                            Toast.makeText(AddProductActivity.this, ""+e.getMessage(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(AddProductActivity.this, "" + e.getMessage(), Toast.LENGTH_SHORT).show();
                         }
                     });
-
-
-
         }
+
+
     }
 
     private void clearData() {
@@ -292,7 +308,10 @@ public class AddProductActivity extends AppCompatActivity {
         description.setText("");
         price.setText("");
         rating.setText("");
-        imageView.setImageResource(R.drawable.ic_baseline_shopping_cart_24);
+        img1.setImageResource(R.mipmap.ic_launcher);
+        img2.setImageResource(R.mipmap.ic_launcher);
+        img3.setImageResource(R.mipmap.ic_launcher);
+        img4.setImageResource(R.mipmap.ic_launcher);
     }
 
     private void categoryDialog() {
@@ -324,22 +343,20 @@ public class AddProductActivity extends AppCompatActivity {
     }
 
     private void showImagePickDialog() {
-        String[] options = {"Camera","Gallery"};
+        String[] options = {"Gallery"};
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Pick Image")
                 .setItems(options, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        if(i == 0){
-                            if(checkCameraPermission()){
+                        if (i == 1) {
+                            if (checkCameraPermission()) {
                                 pickFromCamera();
-                            }
-                            else {
+                            } else {
                                 requestCameraPermission();
                             }
-                        }
-                        else {
-                            if (checkStoragePermission()){
+                        } else if(i == 0) {
+                            if (checkStoragePermission()) {
                                 pickFromGallery();
                             } else {
                                 requestStoragePermission();
@@ -351,64 +368,65 @@ public class AddProductActivity extends AppCompatActivity {
     }
 
     private void pickFromGallery() {
-        Intent intent = new Intent(Intent.ACTION_PICK);
+        Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
         intent.setType("image/*");
-        startActivityForResult(intent,IMAGE_PICK_GALLERY_CODE);
+        intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
+        startActivityForResult(intent, IMAGE_PICK_GALLERY_CODE);
     }
 
     private void pickFromCamera() {
         ContentValues contentValues = new ContentValues();
-        contentValues.put(MediaStore.Images.Media.TITLE,"Temp_Image_Title");
-        contentValues.put(MediaStore.Images.Media.DESCRIPTION,"Temp_Image_Description");
+        contentValues.put(MediaStore.Images.Media.TITLE, "Temp_Image_Title");
+        contentValues.put(MediaStore.Images.Media.DESCRIPTION, "Temp_Image_Description");
 
         image_uri = getContentResolver().insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, contentValues);
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        intent.putExtra(MediaStore.EXTRA_OUTPUT,image_uri);
-        startActivityForResult(intent,IMAGE_PICK_CAMERA_CODE);
+        intent.putExtra(MediaStore.EXTRA_OUTPUT, image_uri);
+        startActivityForResult(intent, IMAGE_PICK_CAMERA_CODE);
     }
 
-    private  boolean checkStoragePermission(){
-        boolean result = ContextCompat.checkSelfPermission(this,Manifest.permission.WRITE_EXTERNAL_STORAGE) ==
+    private boolean checkStoragePermission() {
+        boolean result = ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) ==
                 (PackageManager.PERMISSION_GRANTED);
-        return  result;
+        return result;
     }
 
-    private void requestStoragePermission(){
-        ActivityCompat.requestPermissions(this,storagePermissions,STORAGE_REQUEST_CODE);
+    private void requestStoragePermission() {
+        ActivityCompat.requestPermissions(this, storagePermissions, STORAGE_REQUEST_CODE);
     }
 
-    private  boolean checkCameraPermission(){
-        boolean result = ContextCompat.checkSelfPermission(this,Manifest.permission.CAMERA) ==
+    private boolean checkCameraPermission() {
+        boolean result = ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) ==
                 (PackageManager.PERMISSION_GRANTED);
-        boolean result1 = ContextCompat.checkSelfPermission(this,Manifest.permission.WRITE_EXTERNAL_STORAGE) ==
+        boolean result1 = ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) ==
                 (PackageManager.PERMISSION_GRANTED);
-        return  result && result1;
+        return result && result1;
     }
 
-    private void requestCameraPermission(){
-        ActivityCompat.requestPermissions(this,cameraPermissions,CAMERA_REQUEST_CODE);
+    private void requestCameraPermission() {
+        ActivityCompat.requestPermissions(this, cameraPermissions, CAMERA_REQUEST_CODE);
     }
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        switch (requestCode){
-            case CAMERA_REQUEST_CODE:{
-                if (grantResults.length > 0){
+        switch (requestCode) {
+            case CAMERA_REQUEST_CODE: {
+                if (grantResults.length > 0) {
                     boolean cameraAccepted = grantResults[0] == PackageManager.PERMISSION_GRANTED;
                     boolean storageAccepted = grantResults[1] == PackageManager.PERMISSION_GRANTED;
-                    if (cameraAccepted && storageAccepted){
+                    if (cameraAccepted && storageAccepted) {
                         pickFromCamera();
-                    } else{
+                    } else {
                         Toast.makeText(this, "Quyền truy cập camera và bộ nhớ là bắt buộc !", Toast.LENGTH_SHORT).show();
                     }
                 }
             }
-            case STORAGE_REQUEST_CODE:{
-                if (grantResults.length > 0){
+            case STORAGE_REQUEST_CODE: {
+                if (grantResults.length > 0) {
                     boolean storageAccepted = grantResults[0] == PackageManager.PERMISSION_GRANTED;
-                    if (storageAccepted){
+                    if (storageAccepted) {
                         pickFromGallery();
-                    } else{
+                    } else {
                         Toast.makeText(this, "Quyền truy cập bộ nhớ là bắt buộc !", Toast.LENGTH_SHORT).show();
                     }
                 }
@@ -419,13 +437,28 @@ public class AddProductActivity extends AppCompatActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        if (resultCode == RESULT_OK){
+        if (resultCode == RESULT_OK) {
 
-            if (requestCode == IMAGE_PICK_GALLERY_CODE){
-                image_uri = data.getData();
-                imageView.setImageURI(image_uri);
-            }else if(requestCode == IMAGE_PICK_CAMERA_CODE){
-                imageView.setImageURI(image_uri);
+            if (requestCode == IMAGE_PICK_GALLERY_CODE) {
+                if (data.getClipData() != null) {
+                    int countClipdata = data.getClipData().getItemCount();
+                    int currentImageSelect = 0;
+                    while (currentImageSelect < countClipdata) {
+                        image_uri = data.getClipData().getItemAt(currentImageSelect).getUri();
+                        image_url.add(image_uri);
+
+                        currentImageSelect = currentImageSelect + 1;
+                    }
+                    Toast.makeText(this, "Bạn đã chọn 4 ảnh sản phẩm.", Toast.LENGTH_SHORT).show();
+                    img1.setImageURI(image_url.get(0));
+                    img2.setImageURI(image_url.get(1));
+                    img3.setImageURI(image_url.get(2));
+                    img4.setImageURI(image_url.get(3));
+                } else {
+                    Toast.makeText(this, "Hãy chọn 4 ảnh cho sản phẩm mới!", Toast.LENGTH_SHORT).show();
+                }
+            } else if (requestCode == IMAGE_PICK_CAMERA_CODE) {
+                img1.setImageURI(image_uri);
             }
         }
 

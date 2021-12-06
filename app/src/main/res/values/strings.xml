@@ -13,8 +13,11 @@
     <string name="menu_home">Home</string>
     <string name="menu_gallery">Gallery</string>
     <string name="menu_slideshow">Slideshow</string>
-
-
+    <!--Link video-->
+    <string name="video1">https://firebasestorage.googleapis.com/v0/b/shopiki-259c1.appspot.com/o/Images%2Fvideo1.mp4?alt=media&amp;token=69681ba0-54fa-47d9-828d-98084769d25b</string>
+    <string name="video2">https://firebasestorage.googleapis.com/v0/b/shopiki-259c1.appspot.com/o/Images%2Fvideo2.mp4?alt=media&amp;token=75dbbc60-9000-42b8-8871-d2d1cef3f8b0</string>
+    <string name="video3">Slidehttps://firebasestorage.googleapis.com/v0/b/shopiki-259c1.appspot.com/o/Images%2Fvideo3.mp4?alt=media&amp;token=a0dc860b-e4d3-4fa0-b04a-872c470f4ad7show</string>
+    <string name="video4">https://firebasestorage.googleapis.com/v0/b/shopiki-259c1.appspot.com/o/Images%2Fvideo4.mp4?alt=media&amp;token=0f92c34c-d678-4912-82d4-48a8681b8a48</string>
     <!--Policy-->
     <string name="policy1">This Privacy Policy describes Our policies and procedures on the collection, use and disclosure of Your information when You use the Service and tells You about Your privacy rights and how the law protects You.</string>
     <string name="policy2">We use Your Personal data to provide and improve the Service. By using the Service, You agree to the collection and use of information in accordance with this Privacy Policy. This Privacy Policy has been created with the help of the Privacy Policy Generator.</string>
