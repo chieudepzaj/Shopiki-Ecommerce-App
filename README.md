@@ -1,7 +1,7 @@
 # Shopiki - Ứng dụng thương mại điện tử
 Ứng dụng thương mại điện tử Ecommerce App for Android gồm các chức năng: 
-+User: xem sản phẩm, danh mục sản phẩm, xem/chỉnh sửa profile,...
-+Admin:xem sản phẩm,tạo sản phẩm.
++ User: xem sản phẩm, danh mục sản phẩm, xem/chỉnh sửa profile,...
++ Admin:xem sản phẩm,tạo sản phẩm.
 Ứng dụng được lấy cảm hứng từ 2 app thương mại điện tử lớn: tiki,shopee.
 + Sử dụng firebase firestore làm cơ sở dữ liệu và firebase realtime làm profile cho user.
 + Mọi thông tin chi tiết hoặc góp ý vui lòng liên hệ qua email: chieumu1999@gmail.com
