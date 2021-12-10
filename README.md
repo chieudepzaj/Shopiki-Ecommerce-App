@@ -11,8 +11,8 @@
 
 # Shopiki Ecommerce App
 Ecommerce App for Android includes the following functions:
-+User: view products, product categories, view/edit profiles,...
-+Admin: view products, create products.
++ User: view products, product categories, view/edit profiles,...
++ Admin: view products, create products.
 The app is inspired by 2 big e-commerce apps: tiki, shopee.
 + Use firebase firestore as database and realtime firebase as user profile.
 + For more information or suggestions, please contact via email: chieumu1999@gmail.com
