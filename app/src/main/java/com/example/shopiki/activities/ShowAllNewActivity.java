@@ -49,12 +49,12 @@ public class ShowAllNewActivity extends AppCompatActivity {
 
         firestore = FirebaseFirestore.getInstance();
         recyclerView = findViewById(R.id.show_all_rec);
-        recyclerView.setLayoutManager(new GridLayoutManager(this,2));
+        recyclerView.setLayoutManager(new GridLayoutManager(this, 2));
         showAllModelList = new ArrayList<>();
         showAllAdapter = new ShowAllAdapter(this, showAllModelList);
         recyclerView.setAdapter(showAllAdapter);
 
-        if(type == null || type.isEmpty()) {
+        if (type == null || type.isEmpty()) {
             firestore.collection("NewProducts")
                     .get()
                     .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {

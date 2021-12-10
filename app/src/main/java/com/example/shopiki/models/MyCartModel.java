@@ -6,7 +6,7 @@ public class MyCartModel {
 
     String CurrentTime;
     String CurrentDate;
-    String productName,productPrice;
+    String productName, productPrice;
     String totalQuantity;
     int totalPrice;
 

@@ -35,19 +35,18 @@ public class MyCartAdapter extends RecyclerView.Adapter<MyCartAdapter.ViewHolder
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new ViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.my_cart_item,parent,false));
+        return new ViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.my_cart_item, parent, false));
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 //
-     holder.name.setText(list.get(position).getProductName());
+        holder.name.setText(list.get(position).getProductName());
 //        holder.time.setText(list.get(position).getCurrentTime());
-        holder.price.setText(list.get(position).getProductPrice()+ " ₫");
+        holder.price.setText(list.get(position).getProductPrice() + " ₫");
 //        holder.date.setText(list.get(position).getCurrentDate());
-        holder.totalPrice.setText(String.valueOf(list.get(position).getTotalPrice())+" ₫");
+        holder.totalPrice.setText(String.valueOf(list.get(position).getTotalPrice()) + " ₫");
         holder.totalQuantity.setText(list.get(position).getTotalQuantity());
-
 
 
     }
@@ -59,15 +58,15 @@ public class MyCartAdapter extends RecyclerView.Adapter<MyCartAdapter.ViewHolder
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        TextView name,price,date,time,totalQuantity,totalPrice;
+        TextView name, price, date, time, totalQuantity, totalPrice;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
             name = itemView.findViewById(R.id.product_name);
             price = itemView.findViewById(R.id.product_price);
-      //      date = itemView.findViewById(R.id.current_date);
-       //     time = itemView.findViewById(R.id.current_time);
+            //      date = itemView.findViewById(R.id.current_date);
+            //     time = itemView.findViewById(R.id.current_time);
             totalQuantity = itemView.findViewById(R.id.total_quantity);
             totalPrice = itemView.findViewById(R.id.total_price);
         }

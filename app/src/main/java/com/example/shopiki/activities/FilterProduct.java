@@ -21,14 +21,13 @@ public class FilterProduct extends Filter {
     @Override
     protected FilterResults performFiltering(CharSequence charSequence) {
         FilterResults results = new FilterResults();
-        if(charSequence != null && charSequence.length() > 0){
-
+        if (charSequence != null && charSequence.length() > 0) {
 
 
             charSequence = charSequence.toString().toUpperCase();
             ArrayList<ShowAllModel> filteredModel = new ArrayList<>();
-            for (int i=0;i<filterList.size();i++){
-                if (filterList.get(i).getName().toUpperCase().contains(charSequence) || filterList.get(i).getType().toUpperCase().contains(charSequence)){
+            for (int i = 0; i < filterList.size(); i++) {
+                if (filterList.get(i).getName().toUpperCase().contains(charSequence) || filterList.get(i).getType().toUpperCase().contains(charSequence)) {
                     filteredModel.add(filterList.get(i));
                 }
             }

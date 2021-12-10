@@ -23,7 +23,7 @@
         <entry key="..\:/Users/chieudepzaj/AndroidStudioProjects/Shopiki/app/src/main/res/drawable/search_bg.xml" value="0.1" />
         <entry key="..\:/Users/chieudepzaj/AndroidStudioProjects/Shopiki/app/src/main/res/font/amethysta.xml" value="0.284375" />
         <entry key="..\:/Users/chieudepzaj/AndroidStudioProjects/Shopiki/app/src/main/res/font/arabotofont.xml" value="0.284375" />
-        <entry key="..\:/Users/chieudepzaj/AndroidStudioProjects/Shopiki/app/src/main/res/layout/activity_add_product.xml" value="0.42397914856646396" />
+        <entry key="..\:/Users/chieudepzaj/AndroidStudioProjects/Shopiki/app/src/main/res/layout/activity_add_product.xml" value="0.2" />
         <entry key="..\:/Users/chieudepzaj/AndroidStudioProjects/Shopiki/app/src/main/res/layout/activity_admin_login.xml" value="0.264" />
         <entry key="..\:/Users/chieudepzaj/AndroidStudioProjects/Shopiki/app/src/main/res/layout/activity_admin_menu.xml" value="0.4" />
         <entry key="..\:/Users/chieudepzaj/AndroidStudioProjects/Shopiki/app/src/main/res/layout/activity_cart.xml" value="0.2" />
@@ -36,6 +36,7 @@
         <entry key="..\:/Users/chieudepzaj/AndroidStudioProjects/Shopiki/app/src/main/res/layout/activity_show_all_new.xml" value="0.12360688956433637" />
         <entry key="..\:/Users/chieudepzaj/AndroidStudioProjects/Shopiki/app/src/main/res/layout/activity_show_all_popular.xml" value="0.12360688956433637" />
         <entry key="..\:/Users/chieudepzaj/AndroidStudioProjects/Shopiki/app/src/main/res/layout/activity_show_all_suggest.xml" value="0.12360688956433637" />
+        <entry key="..\:/Users/chieudepzaj/AndroidStudioProjects/Shopiki/app/src/main/res/layout/activity_splash.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/chieudepzaj/AndroidStudioProjects/Shopiki/app/src/main/res/layout/category_list.xml" value="0.1" />
         <entry key="..\:/Users/chieudepzaj/AndroidStudioProjects/Shopiki/app/src/main/res/layout/content_navigation_drawer.xml" value="0.12360688956433637" />
         <entry key="..\:/Users/chieudepzaj/AndroidStudioProjects/Shopiki/app/src/main/res/layout/fragment_gallery.xml" value="0.12360688956433637" />

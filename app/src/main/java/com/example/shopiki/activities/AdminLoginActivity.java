@@ -22,7 +22,6 @@ public class AdminLoginActivity extends AppCompatActivity {
     String emailPattern = "[a-zA-Z0-9._-]+[a-zA-Z0-9._-]+[a-zA-Z0-9._-]+[a-zA-Z0-9._-]+[a-zA-Z0-9._-]+[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
     private FirebaseAuth auth;
     String useradmin = "admin1999@gmail.com";
-    String passadmin ="anhchieu99";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,7 +60,7 @@ public class AdminLoginActivity extends AppCompatActivity {
             return;
         }
 
-        auth.signInWithEmailAndPassword(userEmail,userPassword)
+        auth.signInWithEmailAndPassword(userEmail, userPassword)
                 .addOnCompleteListener(AdminLoginActivity.this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
@@ -77,6 +76,6 @@ public class AdminLoginActivity extends AppCompatActivity {
     }
 
     public void signinuser(View view) {
-        startActivity(new Intent(AdminLoginActivity.this,LoginActivity.class));
+        startActivity(new Intent(AdminLoginActivity.this, LoginActivity.class));
     }
 }

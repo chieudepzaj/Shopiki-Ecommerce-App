@@ -2,147 +2,160 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="5dp"
+    android:background="@drawable/backgr2"
     android:gravity="left"
-    android:background="@drawable/backgr2">
-<ScrollView
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content">
-    <LinearLayout
+    android:orientation="vertical"
+    android:padding="5dp">
+
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_height="wrap_content">
 
-        <TextView
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Privacy Policy"
-            android:textColor="@color/black"
-            android:fontFamily="@font/shopee2021regular"
-            android:textStyle="bold"
-            android:textSize="22sp"/>
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:textColor="@color/white"
-            android:text="@string/policy1"
-            android:fontFamily="@font/shopee2021regular"
-            android:textStyle="normal"
-            android:textSize="18sp"/>
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColor="@color/white"
-            android:layout_marginTop="5dp"
-            android:text="@string/policy2"
-            android:fontFamily="@font/shopee2021regular"
-            android:textStyle="normal"
-            android:textSize="18sp"/>
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Personal Data"
-            android:textColor="@color/black"
-            android:fontFamily="@font/shopee2021regular"
-            android:textStyle="bold"
-            android:textSize="20sp"/>
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColor="@color/white"
-            android:layout_marginTop="5dp"
-            android:text="@string/policy3"
-            android:fontFamily="@font/shopee2021regular"
-            android:textStyle="normal"
-            android:textSize="18sp"/>
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColor="@color/white"
-            android:layout_marginTop="5dp"
-            android:layout_marginLeft="7dp"
-            android:text="\u25CF Email address"
-            android:fontFamily="@font/shopee2021regular"
-            android:textStyle="normal"
-            android:textSize="18sp"/>
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColor="@color/white"
-            android:layout_marginTop="5dp"
-            android:layout_marginLeft="7dp"
-            android:text="\u25CF First name and last name"
-            android:fontFamily="@font/shopee2021regular"
-            android:textStyle="normal"
-            android:textSize="18sp"/>
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColor="@color/white"
-            android:layout_marginTop="5dp"
-            android:layout_marginLeft="7dp"
-            android:text="\u25CF Phone number"
-            android:fontFamily="@font/shopee2021regular"
-            android:textStyle="normal"
-            android:textSize="18sp"/>
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColor="@color/white"
-            android:layout_marginTop="5dp"
-            android:layout_marginLeft="7dp"
-            android:text="\u25CF Usage Data"
-            android:fontFamily="@font/shopee2021regular"
-            android:textStyle="normal"
-            android:textSize="18sp"/>
+            android:orientation="vertical">
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Security of Your Personal Data"
-            android:textColor="@color/black"
-            android:fontFamily="@font/shopee2021regular"
-            android:textStyle="bold"
-            android:textSize="22sp"/>
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:textColor="@color/white"
-            android:text="@string/policy4"
-            android:fontFamily="@font/shopee2021regular"
-            android:textStyle="normal"
-            android:textSize="18sp"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/shopee2021regular"
+                android:text="Privacy Policy"
+                android:textColor="@color/black"
+                android:textSize="22sp"
+                android:textStyle="bold" />
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Contact Us"
-            android:textColor="@color/black"
-            android:fontFamily="@font/shopee2021regular"
-            android:textStyle="bold"
-            android:textSize="22sp"/>
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:textColor="@color/white"
-            android:text="@string/policy5"
-            android:fontFamily="@font/shopee2021regular"
-            android:textStyle="normal"
-            android:textSize="18sp"/>
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:layout_marginLeft="7dp"
-            android:textColor="@color/white"
-            android:text="@string/policy5"
-            android:fontFamily="@font/shopee2021regular"
-            android:textStyle="normal"
-            android:textSize="18sp"/>
-    </LinearLayout>
-</ScrollView>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:fontFamily="@font/shopee2021regular"
+                android:text="@string/policy1"
+                android:textColor="@color/white"
+                android:textSize="18sp"
+                android:textStyle="normal" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:fontFamily="@font/shopee2021regular"
+                android:text="@string/policy2"
+                android:textColor="@color/white"
+                android:textSize="18sp"
+                android:textStyle="normal" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/shopee2021regular"
+                android:text="Personal Data"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:fontFamily="@font/shopee2021regular"
+                android:text="@string/policy3"
+                android:textColor="@color/white"
+                android:textSize="18sp"
+                android:textStyle="normal" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="7dp"
+                android:layout_marginTop="5dp"
+                android:fontFamily="@font/shopee2021regular"
+                android:text="\u25CF Email address"
+                android:textColor="@color/white"
+                android:textSize="18sp"
+                android:textStyle="normal" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="7dp"
+                android:layout_marginTop="5dp"
+                android:fontFamily="@font/shopee2021regular"
+                android:text="\u25CF First name and last name"
+                android:textColor="@color/white"
+                android:textSize="18sp"
+                android:textStyle="normal" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="7dp"
+                android:layout_marginTop="5dp"
+                android:fontFamily="@font/shopee2021regular"
+                android:text="\u25CF Phone number"
+                android:textColor="@color/white"
+                android:textSize="18sp"
+                android:textStyle="normal" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="7dp"
+                android:layout_marginTop="5dp"
+                android:fontFamily="@font/shopee2021regular"
+                android:text="\u25CF Usage Data"
+                android:textColor="@color/white"
+                android:textSize="18sp"
+                android:textStyle="normal" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/shopee2021regular"
+                android:text="Security of Your Personal Data"
+                android:textColor="@color/black"
+                android:textSize="22sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:fontFamily="@font/shopee2021regular"
+                android:text="@string/policy4"
+                android:textColor="@color/white"
+                android:textSize="18sp"
+                android:textStyle="normal" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/shopee2021regular"
+                android:text="Contact Us"
+                android:textColor="@color/black"
+                android:textSize="22sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:fontFamily="@font/shopee2021regular"
+                android:text="@string/policy5"
+                android:textColor="@color/white"
+                android:textSize="18sp"
+                android:textStyle="normal" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="7dp"
+                android:layout_marginTop="5dp"
+                android:fontFamily="@font/shopee2021regular"
+                android:text="@string/policy5"
+                android:textColor="@color/white"
+                android:textSize="18sp"
+                android:textStyle="normal" />
+        </LinearLayout>
+    </ScrollView>
 </LinearLayout>

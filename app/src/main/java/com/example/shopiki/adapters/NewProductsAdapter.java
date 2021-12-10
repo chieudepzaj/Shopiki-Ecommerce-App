@@ -32,7 +32,7 @@ public class NewProductsAdapter extends RecyclerView.Adapter<NewProductsAdapter.
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new ViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.new_products,parent,false));
+        return new ViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.new_products, parent, false));
     }
 
     @Override
@@ -46,7 +46,7 @@ public class NewProductsAdapter extends RecyclerView.Adapter<NewProductsAdapter.
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(context, DetailedActivity.class);
-                intent.putExtra("detailed",list.get(position));
+                intent.putExtra("detailed", list.get(position));
                 context.startActivity(intent);
             }
         });
@@ -60,7 +60,7 @@ public class NewProductsAdapter extends RecyclerView.Adapter<NewProductsAdapter.
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         ImageView newImg;
-        TextView newName,newPrice;
+        TextView newName, newPrice;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);

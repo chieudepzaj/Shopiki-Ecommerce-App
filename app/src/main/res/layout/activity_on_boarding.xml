@@ -39,15 +39,15 @@
             android:orientation="horizontal"
             android:paddingBottom="20dp" />
 
-        <Button
-            android:id="@+id/next_btn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentBottom="true"
-            android:background="#00000000"
-            android:drawableEnd="@drawable/ic_baseline_arrow_forward_ios_24"
-            android:paddingBottom="30dp" />
+<!--        <Button-->
+<!--            android:id="@+id/next_btn"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_alignParentRight="true"-->
+<!--            android:layout_alignParentBottom="true"-->
+<!--            android:background="#00000000"-->
+<!--            android:drawableEnd="@drawable/ic_baseline_arrow_forward_ios_24"-->
+<!--            android:paddingBottom="30dp" />-->
 
 
     </RelativeLayout>

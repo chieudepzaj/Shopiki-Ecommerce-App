@@ -31,7 +31,7 @@ public class SuggestProductsAdapter extends RecyclerView.Adapter<SuggestProducts
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new ViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.suggest_items,parent,false));
+        return new ViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.suggest_items, parent, false));
     }
 
     @Override
@@ -45,7 +45,7 @@ public class SuggestProductsAdapter extends RecyclerView.Adapter<SuggestProducts
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(context, DetailedActivity.class);
-                intent.putExtra("detailed",suggestProductsModelList.get(position));
+                intent.putExtra("detailed", suggestProductsModelList.get(position));
                 context.startActivity(intent);
             }
         });
@@ -60,7 +60,7 @@ public class SuggestProductsAdapter extends RecyclerView.Adapter<SuggestProducts
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         ImageView imageView;
-        TextView name,price;
+        TextView name, price;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);

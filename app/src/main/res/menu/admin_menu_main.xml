@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/admin_logout"
-        android:title="Đăng xuất"
         android:icon="@drawable/ic_baseline_loginout"
-        app:showAsAction="always"/>
+        android:title="Đăng xuất"
+        app:showAsAction="always" />
 </menu>

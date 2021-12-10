@@ -50,10 +50,10 @@ public class AddProductActivity extends AppCompatActivity {
 
     Toolbar toolbar;
     //ui views
-    private Button addproduct,imageView;
-    private ImageView img1,img2,img3,img4;
+    private Button addproduct, imageView, addkeyword;
+    private ImageView img1, img2, img3, img4;
     private TextView category, event;
-    private EditText name, price, rating, description;
+    private EditText name, price, rating, description, keyword;
     // permission image
     private static final int CAMERA_REQUEST_CODE = 200;
     private static final int STORAGE_REQUEST_CODE = 300;
@@ -74,7 +74,9 @@ public class AddProductActivity extends AppCompatActivity {
     private UploadTask uploadTask;
 
     int inputprice, type;
-
+    //add keyword to array
+    private ArrayList<String> keyword_array = new ArrayList<String>();
+    private int count_keyword = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -93,6 +95,8 @@ public class AddProductActivity extends AppCompatActivity {
         price = findViewById(R.id.add_price_product);
         rating = findViewById(R.id.add_rating_product);
         imageView = findViewById(R.id.img_icon);
+        addkeyword = findViewById(R.id.btn_keywords);
+        keyword = findViewById(R.id.add_keywords);
         img1 = findViewById(R.id.img_name_1);
         img2 = findViewById(R.id.img_name_2);
         img3 = findViewById(R.id.img_name_3);
@@ -101,7 +105,7 @@ public class AddProductActivity extends AppCompatActivity {
         toolbar = findViewById(R.id.add_product_toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setTitle("Thêm Sản Phẩm");
+//        getSupportActionBar().setTitle("Thêm Sản Phẩm");
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -135,13 +139,40 @@ public class AddProductActivity extends AppCompatActivity {
             }
         });
 
+        addkeyword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                inputkeyword();
+            }
+        });
+
         addproduct.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                inputData();
+                try {
+                    inputData();
+                }
+                catch (Exception ex){
+                    Toast.makeText(AddProductActivity.this, "Chưa có dữ liệu.", Toast.LENGTH_SHORT).show();
+                    return;
+                }
             }
         });
+
+    }
+
+    private String keywordstring;
+
+    private void inputkeyword() {
+        keywordstring = keyword.getText().toString().trim();
+        if (TextUtils.isEmpty(keywordstring)) {
+            Toast.makeText(this, "Từ khóa tìm kiếm trống. Hãy nhập lại!", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        keyword_array.add(keywordstring);
+        Toast.makeText(this, "Từ khóa " +"\"" + keywordstring +"\""+ " đã được thêm.", Toast.LENGTH_SHORT).show();
+        keyword.setText("");
 
     }
 
@@ -159,7 +190,7 @@ public class AddProductActivity extends AppCompatActivity {
         inputprice = Integer.parseInt(price.getText().toString().trim());
         double ratingstar = Double.parseDouble(productrating);
         eventtype = event.getText().toString().trim();
-        //check input
+
         if (TextUtils.isEmpty(productname)) {
             Toast.makeText(this, "Nhập tên sản phẩm!", Toast.LENGTH_SHORT).show();
             return;
@@ -184,6 +215,11 @@ public class AddProductActivity extends AppCompatActivity {
             Toast.makeText(this, "Nhập đánh giá sản phẩm từ 0-5!", Toast.LENGTH_SHORT).show();
             return;
         }
+        if (keyword_array.isEmpty()) {
+            Toast.makeText(this, "Sản phẩm của bạn chưa có từ khóa tìm kiếm.", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
         if (eventtype.equalsIgnoreCase(event1)) {
             type = 1;
         }
@@ -220,31 +256,27 @@ public class AddProductActivity extends AppCompatActivity {
                                 public void onSuccess(Uri uri) {
                                     String imageUrl = uri.toString();
                                     urlImage.add(imageUrl);
-                                    if (urlImage.size() == image_url.size()){
+                                    if (urlImage.size() == image_url.size()) {
                                         //createNewPost(imageUrl);
-                                        final HashMap<String,Object> cartMap = new HashMap<>();
-                                        cartMap.put("name",name.getText().toString());
-                                        cartMap.put("price",inputprice);
-                                        cartMap.put("description",description.getText().toString());
-                                        cartMap.put("rating",rating.getText().toString());
-                                        cartMap.put("type",category.getText().toString());
-                                        for (int i = 0; i <urlImage.size() ; i++) {
-                                            if(i == 0){
+                                        final HashMap<String, Object> cartMap = new HashMap<>();
+                                        cartMap.put("name", name.getText().toString());
+                                        cartMap.put("price", inputprice);
+                                        cartMap.put("description", description.getText().toString());
+                                        cartMap.put("rating", rating.getText().toString());
+                                        cartMap.put("type", category.getText().toString());
+                                        for (int i = 0; i < urlImage.size(); i++) {
+                                            if (i == 0) {
                                                 cartMap.put("img_url", urlImage.get(i));
-                                            } else{
-                                                cartMap.put("img_url"+i, urlImage.get(i));
+                                            } else {
+                                                cartMap.put("img_url" + i, urlImage.get(i));
                                             }
 
                                         }
 
 
-                                        db.collection("ShowAll").add(cartMap).addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
-                                            @Override
-                                            public void onComplete(@NonNull Task<DocumentReference> task) {
 
-                                            }
-                                        });
-                                        if (type == 1){
+
+                                        if (type == 1) {
                                             db.collection("NewProducts").add(cartMap).addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
                                                 @Override
                                                 public void onComplete(@NonNull Task<DocumentReference> task) {
@@ -254,8 +286,8 @@ public class AddProductActivity extends AppCompatActivity {
                                                 }
                                             });
                                         }
-                                        if (type == 2){
-                                            db.collection("PopularProducts").add(cartMap).addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
+                                        if (type == 2) {
+                                            db.collection("AllProducts").add(cartMap).addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
                                                 @Override
                                                 public void onComplete(@NonNull Task<DocumentReference> task) {
                                                     progressDialog.dismiss();
@@ -264,7 +296,7 @@ public class AddProductActivity extends AppCompatActivity {
                                                 }
                                             });
                                         }
-                                        if (type == 3){
+                                        if (type == 3) {
                                             db.collection("SuggestProducts").add(cartMap).addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
                                                 @Override
                                                 public void onComplete(@NonNull Task<DocumentReference> task) {
@@ -274,6 +306,17 @@ public class AddProductActivity extends AppCompatActivity {
                                                 }
                                             });
                                         }
+
+                                        //add keyword array to db
+                                        cartMap.put("keywords", keyword_array);
+
+                                        db.collection("ShowAll").add(cartMap).addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
+                                            @Override
+                                            public void onComplete(@NonNull Task<DocumentReference> task) {
+
+                                            }
+                                        });
+
                                     }
                                 }
                             });
@@ -287,7 +330,7 @@ public class AddProductActivity extends AppCompatActivity {
                         @Override
                         public void onProgress(@NonNull UploadTask.TaskSnapshot snapshot) {
                             double progress = (100 * snapshot.getBytesTransferred()) / snapshot.getTotalByteCount();
-                            progressDialog.setMessage("Đang tải ảnh " + (upload_count ) + " " + (int) progress + " %");
+                            progressDialog.setMessage("Đang tải ảnh " + (upload_count) + " " + (int) progress + " %");
                         }
                     })
                     .addOnFailureListener(new OnFailureListener() {
@@ -308,6 +351,7 @@ public class AddProductActivity extends AppCompatActivity {
         description.setText("");
         price.setText("");
         rating.setText("");
+        keyword_array.clear();
         img1.setImageResource(R.mipmap.ic_launcher);
         img2.setImageResource(R.mipmap.ic_launcher);
         img3.setImageResource(R.mipmap.ic_launcher);
@@ -355,7 +399,7 @@ public class AddProductActivity extends AppCompatActivity {
                             } else {
                                 requestCameraPermission();
                             }
-                        } else if(i == 0) {
+                        } else if (i == 0) {
                             if (checkStoragePermission()) {
                                 pickFromGallery();
                             } else {

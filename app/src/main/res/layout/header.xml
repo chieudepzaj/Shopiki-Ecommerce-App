@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
     android:layout_height="200dp"
     android:background="@drawable/header"
     android:gravity="bottom"
@@ -13,32 +13,33 @@
         android:layout_height="100dp"
         android:layout_marginBottom="20dp"
         android:src="@drawable/profileimg"
+        app:civ_border_color="#08D3DF"
+        app:civ_border_width="2dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:civ_border_width="2dp"
-        app:civ_border_color="#08D3DF"/>
+        app:layout_constraintTop_toTopOf="parent" />
+
     <TextView
         android:id="@+id/header_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Shopiki"
         android:layout_marginLeft="10dp"
+        android:fontFamily="@font/shopee2021light"
+        android:text="Shopiki"
         android:textColor="@color/white"
-        android:textSize="24sp"
-        android:fontFamily="@font/shopee2021light" />
+        android:textSize="24sp" />
 
     <TextView
         android:id="@+id/header_email"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="www.shopiki.com"
+        android:layout_marginLeft="10dp"
         android:layout_marginTop="6dp"
         android:layout_marginBottom="5dp"
+        android:fontFamily="@font/shopee2021light"
+        android:text="www.shopiki.com"
         android:textColor="@color/white"
         android:textSize="16sp"
-        android:layout_marginLeft="10dp"
-        android:textStyle="bold"
-        android:fontFamily="@font/shopee2021light" />
+        android:textStyle="bold" />
 
 </LinearLayout>

@@ -14,47 +14,47 @@
         android:text="" />
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/cart_rec"
         android:layout_width="0dp"
         android:layout_height="490dp"
-        android:id="@+id/cart_rec"
         android:layout_marginTop="5dp"
-        app:layout_constraintWidth_percent=".9"
-        app:layout_constraintTop_toBottomOf="@+id/my_cart_toolbar"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        tools:listitem="@layout/my_cart_item"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/my_cart_toolbar"
+        app:layout_constraintWidth_percent=".9"
+        tools:listitem="@layout/my_cart_item" />
 
     <TextView
         android:id="@+id/textview3"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:layout_constraintWidth_percent=".9"
-        android:text="Tổng tiền hàng: 50000 ₫"
+        android:layout_marginBottom="70dp"
         android:background="#ffffff"
         android:fontFamily="@font/shopee2021regular"
-        android:textSize="20sp"
+        android:gravity="center"
         android:padding="18dp"
-        android:layout_marginBottom="70dp"
+        android:text="Tổng tiền hàng: 50000 ₫"
+        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:gravity="center"/>
+        app:layout_constraintWidth_percent=".9" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/buy_now"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/shopee2021regular"
         android:layout_margin="10dp"
+        android:backgroundTint="@color/red_real"
+        android:fontFamily="@font/shopee2021regular"
         android:padding="14dp"
         android:text="Mua Ngay"
-        android:backgroundTint="@color/red_real"
         android:textAllCaps="false"
-        app:cornerRadius="10dp"
         android:textStyle="normal"
+        app:cornerRadius="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textview3"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textview3"
         app:layout_constraintWidth_percent=".9" />
 </androidx.constraintlayout.widget.ConstraintLayout>

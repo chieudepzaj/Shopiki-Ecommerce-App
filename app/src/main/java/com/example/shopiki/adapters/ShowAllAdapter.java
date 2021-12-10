@@ -24,10 +24,10 @@ import com.example.shopiki.models.ShowAllModel;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ShowAllAdapter extends RecyclerView.Adapter<ShowAllAdapter.ViewHolder>implements Filterable {
+public class ShowAllAdapter extends RecyclerView.Adapter<ShowAllAdapter.ViewHolder> implements Filterable {
 
     private Context context;
-    public List<ShowAllModel> list,filterList;
+    public List<ShowAllModel> list, filterList;
     private FilterProduct filter;
 
     public ShowAllAdapter(Context context, List<ShowAllModel> list) {
@@ -39,20 +39,20 @@ public class ShowAllAdapter extends RecyclerView.Adapter<ShowAllAdapter.ViewHold
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new ViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.show_all_item,parent,false));
+        return new ViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.show_all_item, parent, false));
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Glide.with(context).load(list.get(position).getImg_url()).into(holder.mItemImage);
         holder.mName.setText(list.get(position).getName());
-        holder.mCost.setText(list.get(position).getPrice()+" ₫");
+        holder.mCost.setText(list.get(position).getPrice() + " ₫");
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(context, DetailedActivity.class);
-                intent.putExtra("detailed",list.get(position));
+                intent.putExtra("detailed", list.get(position));
                 context.startActivity(intent);
             }
         });
@@ -66,7 +66,7 @@ public class ShowAllAdapter extends RecyclerView.Adapter<ShowAllAdapter.ViewHold
 
     @Override
     public Filter getFilter() {
-        if(filter == null){
+        if (filter == null) {
             filter = new FilterProduct(this, (ArrayList<ShowAllModel>) filterList);
         }
         return filter;
@@ -77,6 +77,7 @@ public class ShowAllAdapter extends RecyclerView.Adapter<ShowAllAdapter.ViewHold
         private ImageView mItemImage;
         private TextView mCost;
         private TextView mName;
+
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             mItemImage = itemView.findViewById(R.id.item_image);

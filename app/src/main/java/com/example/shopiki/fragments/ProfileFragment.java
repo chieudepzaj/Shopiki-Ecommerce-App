@@ -49,7 +49,7 @@ public class ProfileFragment extends Fragment {
 
 
     private static final int RESULT_OK = -1;
-    EditText name,mobile,address,email;
+    EditText name, mobile, address, email;
     FirebaseAuth auth;
     private ImageView imageView;
     // permission image
@@ -63,10 +63,11 @@ public class ProfileFragment extends Fragment {
     private String[] storagePermissions;
     private Uri image_uri;
     private UploadTask uploadTask;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_profile,container,false);
+        View view = inflater.inflate(R.layout.fragment_profile, container, false);
         name = view.findViewById(R.id.profile_name);
         mobile = view.findViewById(R.id.profile_phone);
         address = view.findViewById(R.id.profile_address);
@@ -76,7 +77,7 @@ public class ProfileFragment extends Fragment {
 
         auth = FirebaseAuth.getInstance();
         //init permission array
-        cameraPermissions = new String[]{Manifest.permission.CAMERA,Manifest.permission.WRITE_EXTERNAL_STORAGE};
+        cameraPermissions = new String[]{Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE};
         storagePermissions = new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE};
 
         showAllUserData();
@@ -164,11 +165,11 @@ public class ProfileFragment extends Fragment {
         reference.child(auth.getUid()).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                String emailstr = ""+snapshot.child("email").getValue();
-                String phonestr = ""+snapshot.child("phone").getValue();
-                String namestr = ""+snapshot.child("name").getValue();
-                String addressstr = ""+snapshot.child("address").getValue();
-                String imagestr = ""+snapshot.child("img_url").getValue();
+                String emailstr = "" + snapshot.child("email").getValue();
+                String phonestr = "" + snapshot.child("phone").getValue();
+                String namestr = "" + snapshot.child("name").getValue();
+                String addressstr = "" + snapshot.child("address").getValue();
+                String imagestr = "" + snapshot.child("img_url").getValue();
 
                 name.setText(namestr);
                 email.setText(emailstr);
@@ -177,36 +178,33 @@ public class ProfileFragment extends Fragment {
 
                 try {
                     Glide.with(getContext()).load(imagestr).placeholder(R.drawable.profileimg).into(imageView);
-                }
-                catch (Exception e){
+                } catch (Exception e) {
                     imageView.setImageResource(R.drawable.profileimg);
                 }
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                Toast.makeText(getContext(), ""+ error.getMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), "" + error.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
     }
 
     private void showImagePickDialog() {
-        String[] options = {"Camera","Gallery"};
+        String[] options = {"Camera", "Gallery"};
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
         builder.setTitle("Pick Image")
                 .setItems(options, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        if(i == 0){
-                            if(checkCameraPermission()){
+                        if (i == 0) {
+                            if (checkCameraPermission()) {
                                 pickFromCamera();
-                            }
-                            else {
+                            } else {
                                 requestCameraPermission();
                             }
-                        }
-                        else {
-                            if (checkStoragePermission()){
+                        } else {
+                            if (checkStoragePermission()) {
                                 pickFromGallery();
                             } else {
                                 requestStoragePermission();
@@ -220,62 +218,62 @@ public class ProfileFragment extends Fragment {
     private void pickFromGallery() {
         Intent intent = new Intent(Intent.ACTION_PICK);
         intent.setType("image/*");
-        startActivityForResult(intent,IMAGE_PICK_GALLERY_CODE);
+        startActivityForResult(intent, IMAGE_PICK_GALLERY_CODE);
     }
 
     private void pickFromCamera() {
         ContentValues contentValues = new ContentValues();
-        contentValues.put(MediaStore.Images.Media.TITLE,"Temp_Image_Title");
-        contentValues.put(MediaStore.Images.Media.DESCRIPTION,"Temp_Image_Description");
+        contentValues.put(MediaStore.Images.Media.TITLE, "Temp_Image_Title");
+        contentValues.put(MediaStore.Images.Media.DESCRIPTION, "Temp_Image_Description");
 
         image_uri = getActivity().getContentResolver().insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, contentValues);
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        intent.putExtra(MediaStore.EXTRA_OUTPUT,image_uri);
-        startActivityForResult(intent,IMAGE_PICK_CAMERA_CODE);
+        intent.putExtra(MediaStore.EXTRA_OUTPUT, image_uri);
+        startActivityForResult(intent, IMAGE_PICK_CAMERA_CODE);
     }
 
-    private  boolean checkStoragePermission(){
-        boolean result = ContextCompat.checkSelfPermission(getContext(),Manifest.permission.WRITE_EXTERNAL_STORAGE) ==
+    private boolean checkStoragePermission() {
+        boolean result = ContextCompat.checkSelfPermission(getContext(), Manifest.permission.WRITE_EXTERNAL_STORAGE) ==
                 (PackageManager.PERMISSION_GRANTED);
-        return  result;
+        return result;
     }
 
-    private void requestStoragePermission(){
-        ActivityCompat.requestPermissions(getActivity(),storagePermissions,STORAGE_REQUEST_CODE);
+    private void requestStoragePermission() {
+        ActivityCompat.requestPermissions(getActivity(), storagePermissions, STORAGE_REQUEST_CODE);
     }
 
-    private  boolean checkCameraPermission(){
-        boolean result = ContextCompat.checkSelfPermission(getContext(),Manifest.permission.CAMERA) ==
+    private boolean checkCameraPermission() {
+        boolean result = ContextCompat.checkSelfPermission(getContext(), Manifest.permission.CAMERA) ==
                 (PackageManager.PERMISSION_GRANTED);
-        boolean result1 = ContextCompat.checkSelfPermission(getContext(),Manifest.permission.WRITE_EXTERNAL_STORAGE) ==
+        boolean result1 = ContextCompat.checkSelfPermission(getContext(), Manifest.permission.WRITE_EXTERNAL_STORAGE) ==
                 (PackageManager.PERMISSION_GRANTED);
-        return  result && result1;
+        return result && result1;
     }
 
-    private void requestCameraPermission(){
-        ActivityCompat.requestPermissions(getActivity(),cameraPermissions,CAMERA_REQUEST_CODE);
+    private void requestCameraPermission() {
+        ActivityCompat.requestPermissions(getActivity(), cameraPermissions, CAMERA_REQUEST_CODE);
     }
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        switch (requestCode){
-            case CAMERA_REQUEST_CODE:{
-                if (grantResults.length > 0){
+        switch (requestCode) {
+            case CAMERA_REQUEST_CODE: {
+                if (grantResults.length > 0) {
                     boolean cameraAccepted = grantResults[0] == PackageManager.PERMISSION_GRANTED;
                     boolean storageAccepted = grantResults[1] == PackageManager.PERMISSION_GRANTED;
-                    if (cameraAccepted && storageAccepted){
+                    if (cameraAccepted && storageAccepted) {
                         pickFromCamera();
-                    } else{
+                    } else {
                         Toast.makeText(getContext(), "Quyền truy cập camera và bộ nhớ là bắt buộc !", Toast.LENGTH_SHORT).show();
                     }
                 }
             }
-            case STORAGE_REQUEST_CODE:{
-                if (grantResults.length > 0){
+            case STORAGE_REQUEST_CODE: {
+                if (grantResults.length > 0) {
                     boolean storageAccepted = grantResults[0] == PackageManager.PERMISSION_GRANTED;
-                    if (storageAccepted){
+                    if (storageAccepted) {
                         pickFromGallery();
-                    } else{
+                    } else {
                         Toast.makeText(getContext(), "Quyền truy cập bộ nhớ là bắt buộc !", Toast.LENGTH_SHORT).show();
                     }
                 }
@@ -286,19 +284,18 @@ public class ProfileFragment extends Fragment {
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        if (resultCode == RESULT_OK){
+        if (resultCode == RESULT_OK) {
 
-            if (requestCode == IMAGE_PICK_GALLERY_CODE){
+            if (requestCode == IMAGE_PICK_GALLERY_CODE) {
                 image_uri = data.getData();
                 imageView.setImageURI(image_uri);
-            }else if(requestCode == IMAGE_PICK_CAMERA_CODE){
+            } else if (requestCode == IMAGE_PICK_CAMERA_CODE) {
                 imageView.setImageURI(image_uri);
             }
         }
 
         super.onActivityResult(requestCode, resultCode, data);
     }
-
 
 
 }

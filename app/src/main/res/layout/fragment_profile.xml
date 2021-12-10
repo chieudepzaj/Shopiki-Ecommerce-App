@@ -13,11 +13,11 @@
         android:layout_height="200dp"
         android:layout_marginTop="15dp"
         android:src="@drawable/profileimg"
+        app:civ_border_color="#08D3DF"
+        app:civ_border_width="2dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:civ_border_width="2dp"
-        app:civ_border_color="#08D3DF"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/profile_name"

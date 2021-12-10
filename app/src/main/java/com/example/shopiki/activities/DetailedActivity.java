@@ -43,9 +43,9 @@ import java.util.List;
 public class DetailedActivity extends AppCompatActivity {
 
     ImageView detailedImg;
-    TextView rating,name,description,price,quantity;
-    Button addToCart,buyNow,chat;
-    ImageView addItems,removeItems ;
+    TextView rating, name, description, price, quantity;
+    Button addToCart, buyNow, chat;
+    ImageView addItems, removeItems;
     float ratingba;
     private RatingBar ratingBar;
 
@@ -62,11 +62,12 @@ public class DetailedActivity extends AppCompatActivity {
     ShowAllModel showAllModel = null;
     private FirebaseFirestore firebaseFirestore;
     FirebaseAuth auth;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detailed);
-  //      getSupportActionBar().hide();
+        //      getSupportActionBar().hide();
 
         toolbar = findViewById(R.id.detailed_toolbar);
         setSupportActionBar(toolbar);
@@ -82,13 +83,13 @@ public class DetailedActivity extends AppCompatActivity {
         auth = FirebaseAuth.getInstance();
         final Object obj = getIntent().getSerializableExtra("detailed");
 
-        if(obj instanceof NewProductsModel){
+        if (obj instanceof NewProductsModel) {
             newProductsModel = (NewProductsModel) obj;
-        } else if(obj instanceof PopularProductsModel){
+        } else if (obj instanceof PopularProductsModel) {
             popularProductsModel = (PopularProductsModel) obj;
-        } else if (obj instanceof SuggestProductsModel){
+        } else if (obj instanceof SuggestProductsModel) {
             suggestProductsModel = (SuggestProductsModel) obj;
-        } else if (obj instanceof ShowAllModel){
+        } else if (obj instanceof ShowAllModel) {
             showAllModel = (ShowAllModel) obj;
         }
 
@@ -113,11 +114,11 @@ public class DetailedActivity extends AppCompatActivity {
         List<SlideModel> slideModels = new ArrayList<>();
 
         //New Products
-        if(newProductsModel != null){
-            slideModels.add(new SlideModel(newProductsModel.getImg_url(),ScaleTypes.CENTER_INSIDE));
-            slideModels.add(new SlideModel(newProductsModel.getImg_url1(),ScaleTypes.CENTER_INSIDE));
-            slideModels.add(new SlideModel(newProductsModel.getImg_url2(),ScaleTypes.CENTER_INSIDE));
-            slideModels.add(new SlideModel(newProductsModel.getImg_url3(),ScaleTypes.CENTER_INSIDE));
+        if (newProductsModel != null) {
+            slideModels.add(new SlideModel(newProductsModel.getImg_url(), ScaleTypes.CENTER_INSIDE));
+            slideModels.add(new SlideModel(newProductsModel.getImg_url1(), ScaleTypes.CENTER_INSIDE));
+            slideModels.add(new SlideModel(newProductsModel.getImg_url2(), ScaleTypes.CENTER_INSIDE));
+            slideModels.add(new SlideModel(newProductsModel.getImg_url3(), ScaleTypes.CENTER_INSIDE));
             imageSlider.setImageList(slideModels);
             name.setText(newProductsModel.getName());
             rating.setText(newProductsModel.getRating());
@@ -130,11 +131,11 @@ public class DetailedActivity extends AppCompatActivity {
             totalPrice = newProductsModel.getPrice() * totalQuantity;
         }
         //Popular Products
-        if(popularProductsModel != null){
-            slideModels.add(new SlideModel(popularProductsModel.getImg_url(),ScaleTypes.CENTER_INSIDE));
-            slideModels.add(new SlideModel(popularProductsModel.getImg_url1(),ScaleTypes.CENTER_INSIDE));
-            slideModels.add(new SlideModel(popularProductsModel.getImg_url2(),ScaleTypes.CENTER_INSIDE));
-            slideModels.add(new SlideModel(popularProductsModel.getImg_url3(),ScaleTypes.CENTER_INSIDE));
+        if (popularProductsModel != null) {
+            slideModels.add(new SlideModel(popularProductsModel.getImg_url(), ScaleTypes.CENTER_INSIDE));
+            slideModels.add(new SlideModel(popularProductsModel.getImg_url1(), ScaleTypes.CENTER_INSIDE));
+            slideModels.add(new SlideModel(popularProductsModel.getImg_url2(), ScaleTypes.CENTER_INSIDE));
+            slideModels.add(new SlideModel(popularProductsModel.getImg_url3(), ScaleTypes.CENTER_INSIDE));
             imageSlider.setImageList(slideModels);
             name.setText(popularProductsModel.getName());
             rating.setText(popularProductsModel.getRating());
@@ -147,8 +148,12 @@ public class DetailedActivity extends AppCompatActivity {
             totalPrice = popularProductsModel.getPrice() * totalQuantity;
         }
         //Suggest Products
-        if(suggestProductsModel != null){
-            Glide.with(getApplicationContext()).load(suggestProductsModel.getImg_url()).into(detailedImg);
+        if (suggestProductsModel != null) {
+            slideModels.add(new SlideModel(suggestProductsModel.getImg_url(), ScaleTypes.CENTER_INSIDE));
+            slideModels.add(new SlideModel(suggestProductsModel.getImg_url1(), ScaleTypes.CENTER_INSIDE));
+            slideModels.add(new SlideModel(suggestProductsModel.getImg_url2(), ScaleTypes.CENTER_INSIDE));
+            slideModels.add(new SlideModel(suggestProductsModel.getImg_url3(), ScaleTypes.CENTER_INSIDE));
+            imageSlider.setImageList(slideModels);
             name.setText(suggestProductsModel.getName());
             rating.setText(suggestProductsModel.getRating());
             description.setText(suggestProductsModel.getDescription());
@@ -160,8 +165,12 @@ public class DetailedActivity extends AppCompatActivity {
             totalPrice = suggestProductsModel.getPrice() * totalQuantity;
         }
         //Show All product
-        if(showAllModel != null){
-            Glide.with(getApplicationContext()).load(showAllModel.getImg_url()).into(detailedImg);
+        if (showAllModel != null) {
+            slideModels.add(new SlideModel(showAllModel.getImg_url(), ScaleTypes.CENTER_INSIDE));
+            slideModels.add(new SlideModel(showAllModel.getImg_url1(), ScaleTypes.CENTER_INSIDE));
+            slideModels.add(new SlideModel(showAllModel.getImg_url2(), ScaleTypes.CENTER_INSIDE));
+            slideModels.add(new SlideModel(showAllModel.getImg_url3(), ScaleTypes.CENTER_INSIDE));
+            imageSlider.setImageList(slideModels);
             name.setText(showAllModel.getName());
             rating.setText(showAllModel.getRating());
             description.setText(showAllModel.getDescription());
@@ -175,9 +184,9 @@ public class DetailedActivity extends AppCompatActivity {
         addToCart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(auth.getCurrentUser() != null) {
+                if (auth.getCurrentUser() != null) {
                     addToCart();
-                } else{
+                } else {
                     Toast.makeText(DetailedActivity.this, "Vui lòng đăng nhập để thực hiện chức năng.", Toast.LENGTH_SHORT).show();
                     startActivity(new Intent(DetailedActivity.this, LoginActivity.class));
                     finish();
@@ -196,20 +205,20 @@ public class DetailedActivity extends AppCompatActivity {
         addItems.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(totalQuantity < 10){
+                if (totalQuantity < 10) {
                     totalQuantity++;
                     quantity.setText(String.valueOf(totalQuantity));
 
-                    if(newProductsModel != null){
+                    if (newProductsModel != null) {
                         totalPrice = newProductsModel.getPrice() * totalQuantity;
                     }
-                    if(popularProductsModel != null){
+                    if (popularProductsModel != null) {
                         totalPrice = popularProductsModel.getPrice() * totalQuantity;
                     }
-                    if(suggestProductsModel != null){
+                    if (suggestProductsModel != null) {
                         totalPrice = suggestProductsModel.getPrice() * totalQuantity;
                     }
-                    if(showAllModel != null){
+                    if (showAllModel != null) {
                         totalPrice = showAllModel.getPrice() * totalQuantity;
                     }
                 }
@@ -219,29 +228,30 @@ public class DetailedActivity extends AppCompatActivity {
         removeItems.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(totalQuantity > 1){
+                if (totalQuantity > 1) {
                     totalQuantity--;
                     quantity.setText(String.valueOf(totalQuantity));
                 }
             }
         });
     }
+
     private void addToCart() {
 
-        String saveCurrentTime,savecurrentDate;
+        String saveCurrentTime, savecurrentDate;
         Calendar callForDate = Calendar.getInstance();
         SimpleDateFormat currentDate = new SimpleDateFormat("MM dd,yyyy");
         savecurrentDate = currentDate.format(callForDate.getTime());
         SimpleDateFormat currentTime = new SimpleDateFormat("HH:mm:ss a");
         saveCurrentTime = currentTime.format(callForDate.getTime());
 
-        final HashMap<String,Object> cartMap = new HashMap<>();
-        cartMap.put("productName",name.getText().toString());
-        cartMap.put("productPrice",price.getText().toString());
-        cartMap.put("currentTime",saveCurrentTime);
-        cartMap.put("currentDate",savecurrentDate);
-        cartMap.put("totalQuantity",quantity.getText().toString());
-        cartMap.put("totalPrice",totalPrice);
+        final HashMap<String, Object> cartMap = new HashMap<>();
+        cartMap.put("productName", name.getText().toString());
+        cartMap.put("productPrice", price.getText().toString());
+        cartMap.put("currentTime", saveCurrentTime);
+        cartMap.put("currentDate", savecurrentDate);
+        cartMap.put("totalQuantity", quantity.getText().toString());
+        cartMap.put("totalPrice", totalPrice);
 
         firebaseFirestore.collection("AddToCart").document(auth.getCurrentUser().getUid())
                 .collection("User").add(cartMap).addOnCompleteListener(new OnCompleteListener<DocumentReference>() {

@@ -76,7 +76,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         navigationView.setNavigationItemSelectedListener(this);
 
 
-
         View headerView = navigationView.getHeaderView(0);
         TextView headername = headerView.findViewById(R.id.header_name);
         TextView headeremail = headerView.findViewById(R.id.header_email);
@@ -134,7 +133,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             loadFragment(cartFragment);
         } else if (id == R.id.nav_logout) {
             auth.signOut();
-            startActivity(new Intent(MainActivity.this, LoginActivity.class));
+            startActivity(new Intent(MainActivity.this, MainActivity.class));
             finish();
         } else if (id == R.id.nav_refesh) {
             startActivity(new Intent(MainActivity.this, MainActivity.class));

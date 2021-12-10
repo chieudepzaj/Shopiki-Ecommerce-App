@@ -31,7 +31,7 @@ public class PopularProductsAdapter extends RecyclerView.Adapter<PopularProducts
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new ViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.popular_items,parent,false));
+        return new ViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.popular_items, parent, false));
     }
 
     @Override
@@ -45,7 +45,7 @@ public class PopularProductsAdapter extends RecyclerView.Adapter<PopularProducts
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(context, DetailedActivity.class);
-                intent.putExtra("detailed",popularProductsModelList.get(position));
+                intent.putExtra("detailed", popularProductsModelList.get(position));
                 context.startActivity(intent);
             }
         });
@@ -60,7 +60,7 @@ public class PopularProductsAdapter extends RecyclerView.Adapter<PopularProducts
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         ImageView imageView;
-        TextView name,price;
+        TextView name, price;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);

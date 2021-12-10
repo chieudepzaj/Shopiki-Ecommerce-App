@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.shopiki.R;
@@ -22,36 +23,32 @@ public class RegistrationActivity extends AppCompatActivity {
     EditText name, email, password, cfpassword;
     String emailPattern = "[a-zA-Z0-9._-]+[a-zA-Z0-9._-]+[a-zA-Z0-9._-]+[a-zA-Z0-9._-]+[a-zA-Z0-9._-]+[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
     private FirebaseAuth auth;
-    SharedPreferences sharedPreferences;
+    ImageView imageView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registration);
-      //  getSupportActionBar().hide();
+          getSupportActionBar().hide();
 
         auth = FirebaseAuth.getInstance();
 
-        if(auth.getCurrentUser() != null){
+        if (auth.getCurrentUser() != null) {
             startActivity(new Intent(RegistrationActivity.this, MainActivity.class));
         }
         name = findViewById(R.id.name);
         email = findViewById(R.id.email);
         password = findViewById(R.id.password);
         cfpassword = findViewById(R.id.confirm_password);
+        imageView = findViewById(R.id.imageView_register);
 
-        sharedPreferences = getSharedPreferences("onBoardingScreen",MODE_PRIVATE);
-        boolean isFirstTime = sharedPreferences.getBoolean("firstTime",true);
+        imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(RegistrationActivity.this, MainActivity.class));
+            }
+        });
 
-        if(isFirstTime){
-            SharedPreferences.Editor editor = sharedPreferences.edit();
-            editor.putBoolean("firstTime",false);
-            editor.commit();
-
-            Intent intent = new Intent(RegistrationActivity.this,OnBoardingActivity.class);
-            startActivity(intent);
-            finish();
-        }
     }
 
     public void signup(View view) {
@@ -82,29 +79,28 @@ public class RegistrationActivity extends AppCompatActivity {
             Toast.makeText(this, "Nhập mật khẩu xác nhận !", Toast.LENGTH_SHORT).show();
             return;
         }
-         if (!cfpass.equals(userPassword)) {
+        if (!cfpass.equals(userPassword)) {
             Toast.makeText(this, "Mật khẩu không khớp", Toast.LENGTH_SHORT).show();
             return;
         }
 
 
-
-            auth.createUserWithEmailAndPassword(userEmail, userPassword)
-                    .addOnCompleteListener(RegistrationActivity.this, new OnCompleteListener<AuthResult>() {
-                        @Override
-                        public void onComplete(@NonNull Task<AuthResult> task) {
-                            if (task.isSuccessful()) {
-                                Toast.makeText(RegistrationActivity.this, "Đăng kí tài khoản thành công", Toast.LENGTH_SHORT).show();
-                                startActivity(new Intent(RegistrationActivity.this, MainActivity.class));
-                            } else {
-                                Toast.makeText(RegistrationActivity.this, "Tài khoản đã tồn tại!", Toast.LENGTH_SHORT).show();
-                            }
+        auth.createUserWithEmailAndPassword(userEmail, userPassword)
+                .addOnCompleteListener(RegistrationActivity.this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            Toast.makeText(RegistrationActivity.this, "Đăng kí tài khoản thành công", Toast.LENGTH_SHORT).show();
+                            startActivity(new Intent(RegistrationActivity.this, MainActivity.class));
+                        } else {
+                            Toast.makeText(RegistrationActivity.this, "Tài khoản đã tồn tại!", Toast.LENGTH_SHORT).show();
                         }
-                    });
+                    }
+                });
 
-        }
+    }
 
-    public void signin (View view){
+    public void signin(View view) {
         startActivity(new Intent(RegistrationActivity.this, LoginActivity.class));
 
     }

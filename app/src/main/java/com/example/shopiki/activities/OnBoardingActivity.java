@@ -27,14 +27,15 @@ public class OnBoardingActivity extends AppCompatActivity {
     Button btn;
     TextView[] dots;
     Animation animation;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //hide status bar
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_on_boarding);
         // hide toolbar
-        getSupportActionBar().hide();
+//        getSupportActionBar().hide();
 
         viewPager = findViewById(R.id.slider);
         dotsLayout = findViewById(R.id.dots);
@@ -49,27 +50,28 @@ public class OnBoardingActivity extends AppCompatActivity {
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(OnBoardingActivity.this,RegistrationActivity.class));
+                startActivity(new Intent(OnBoardingActivity.this, SplashActivity.class));
                 finish();
             }
         });
 
     }
 
-    private void addDots(int position){
+    private void addDots(int position) {
         dots = new TextView[3];
         dotsLayout.removeAllViews();
-        for (int i = 0;i < dots.length; i++){
+        for (int i = 0; i < dots.length; i++) {
             dots[i] = new TextView(this);
             dots[i].setText(Html.fromHtml("&#8226;"));
             dots[i].setTextSize(35);
             dotsLayout.addView(dots[i]);
         }
 
-        if(dots.length > 0){
+        if (dots.length > 0) {
             dots[position].setTextColor(getResources().getColor(R.color.pink));
         }
     }
+
     ViewPager.OnPageChangeListener changeListener = new ViewPager.OnPageChangeListener() {
         @Override
         public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
@@ -81,12 +83,12 @@ public class OnBoardingActivity extends AppCompatActivity {
 
             addDots(position);
 
-            if(position == 0){
+            if (position == 0) {
                 btn.setVisibility(View.INVISIBLE);
-        }else if(position == 1){
+            } else if (position == 1) {
                 btn.setVisibility(View.INVISIBLE);
-            }else {
-                animation = AnimationUtils.loadAnimation(OnBoardingActivity.this,R.anim.slide_animation);
+            } else {
+                animation = AnimationUtils.loadAnimation(OnBoardingActivity.this, R.anim.slide_animation);
                 btn.setAnimation(animation);
                 btn.setVisibility(View.VISIBLE);
             }

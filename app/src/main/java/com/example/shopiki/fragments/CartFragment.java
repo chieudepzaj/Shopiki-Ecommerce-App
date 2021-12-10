@@ -52,9 +52,9 @@ public class CartFragment extends Fragment {
 
         overAllAmount = root.findViewById(R.id.textview3);
         recyclerView = root.findViewById(R.id.cart_rec);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity(),RecyclerView.VERTICAL,false));
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), RecyclerView.VERTICAL, false));
         cartModelList = new ArrayList<>();
-        cartAdapter = new MyCartAdapter(getActivity(),cartModelList);
+        cartAdapter = new MyCartAdapter(getActivity(), cartModelList);
         recyclerView.setAdapter(cartAdapter);
 
         firebaseFirestore.collection("AddToCart").document(auth.getCurrentUser().getUid())
@@ -76,13 +76,13 @@ public class CartFragment extends Fragment {
 
     private void calculateTotalAmount(List<MyCartModel> cartModelList) {
         double totalAmount = 0.0;
-        for(MyCartModel myCartModel : cartModelList){
+        for (MyCartModel myCartModel : cartModelList) {
 
             totalAmount += myCartModel.getTotalPrice();
 
         }
         long number = Double.valueOf(totalAmount).longValue();
-        overAllAmount.setText("Tổng tiền hàng :" +number+" ₫");
+        overAllAmount.setText("Tổng tiền hàng :" + number + " ₫");
     }
 
 

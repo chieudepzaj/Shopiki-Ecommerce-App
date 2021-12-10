@@ -53,12 +53,12 @@ import java.util.List;
 
 public class HomeFragment extends Fragment {
 
-    TextView newproductShowAll,popularproductShowAll,suggestProductShowAll;
+    TextView newproductShowAll, popularproductShowAll, suggestProductShowAll;
 
     LinearLayout linearLayout;
     ProgressDialog progressDialog;
-    RecyclerView catrecyclerView,newProductRecyclerview,trendProductRecyclerview,suggestProductRecyclerview;
-        // Category recyclerview
+    RecyclerView catrecyclerView, newProductRecyclerview, trendProductRecyclerview, suggestProductRecyclerview;
+    // Category recyclerview
     CategoryAdapter categoryAdapter;
     List<CategoryModel> categoryModelList;
 
@@ -73,15 +73,15 @@ public class HomeFragment extends Fragment {
     List<SuggestProductsModel> suggestProductsModelList;
     //Search
     EditText search_box;
-    private  List<ShowAllModel> showAllModelList;
-    private  RecyclerView recyclerViewSearch;
+    private List<ShowAllModel> showAllModelList;
+    private RecyclerView recyclerViewSearch;
     private ShowAllAdapter viewAllAdapter;
     //Firestore
     FirebaseFirestore db;
+
     public HomeFragment() {
         // Required empty public constructor
     }
-
 
 
     @Override
@@ -102,7 +102,6 @@ public class HomeFragment extends Fragment {
         newproductShowAll = root.findViewById(R.id.newProducts_see_all);
         popularproductShowAll = root.findViewById(R.id.popular_see_all);
         suggestProductShowAll = root.findViewById(R.id.suggestProducts_see_all);
-
 
 
         newproductShowAll.setOnClickListener(new View.OnClickListener() {
@@ -135,12 +134,12 @@ public class HomeFragment extends Fragment {
         ImageSlider imageSlider = root.findViewById(R.id.image_slider);
         List<SlideModel> slideModels = new ArrayList<>();
 
-        slideModels.add(new SlideModel(R.drawable.banner1,"Siêu Sale Nghành Hàng Giảm Đến 40%", ScaleTypes.CENTER_INSIDE));
-        slideModels.add(new SlideModel(R.drawable.banner2,"Giảm đến 50% - 100% Chính Hãng", ScaleTypes.CENTER_INSIDE));
-        slideModels.add(new SlideModel(R.drawable.banner3,"Sale Hot Rầm Rộ Chỉ Từ 1K", ScaleTypes.CENTER_INSIDE));
-        slideModels.add(new SlideModel(R.drawable.banner4,"Hi-Tech Sale To Nhất Năm", ScaleTypes.CENTER_INSIDE));
-        slideModels.add(new SlideModel(R.drawable.banner5,"Ngày Hội Xế Yêu - Siêu Ưu Đãi", ScaleTypes.CENTER_INSIDE));
-        slideModels.add(new SlideModel(R.drawable.banner6,"Shopiki Ngon - Giá Hời Deal Ngon", ScaleTypes.CENTER_INSIDE));
+        slideModels.add(new SlideModel(R.drawable.banner1, "Siêu Sale Nghành Hàng Giảm Đến 40%", ScaleTypes.CENTER_INSIDE));
+        slideModels.add(new SlideModel(R.drawable.banner2, "Giảm đến 50% - 100% Chính Hãng", ScaleTypes.CENTER_INSIDE));
+        slideModels.add(new SlideModel(R.drawable.banner3, "Sale Hot Rầm Rộ Chỉ Từ 1K", ScaleTypes.CENTER_INSIDE));
+        slideModels.add(new SlideModel(R.drawable.banner4, "Hi-Tech Sale To Nhất Năm", ScaleTypes.CENTER_INSIDE));
+        slideModels.add(new SlideModel(R.drawable.banner5, "Ngày Hội Xế Yêu - Siêu Ưu Đãi", ScaleTypes.CENTER_INSIDE));
+        slideModels.add(new SlideModel(R.drawable.banner6, "Shopiki Ngon - Giá Hời Deal Ngon", ScaleTypes.CENTER_INSIDE));
         imageSlider.setImageList(slideModels);
 
         progressDialog.setTitle("Shopiki - Thương hiệu của người Việt \uD83C\uDDFB\uD83C\uDDF3");
@@ -149,9 +148,9 @@ public class HomeFragment extends Fragment {
         progressDialog.show();
 
         //Category
-        catrecyclerView.setLayoutManager(new LinearLayoutManager(getActivity(),RecyclerView.HORIZONTAL,false));
+        catrecyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), RecyclerView.HORIZONTAL, false));
         categoryModelList = new ArrayList<>();
-        categoryAdapter = new CategoryAdapter(getActivity(),categoryModelList);
+        categoryAdapter = new CategoryAdapter(getActivity(), categoryModelList);
         catrecyclerView.setAdapter(categoryAdapter);
 
         db.collection("Category")
@@ -161,21 +160,21 @@ public class HomeFragment extends Fragment {
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
                             for (QueryDocumentSnapshot document : task.getResult()) {
-                               CategoryModel categoryModel = document.toObject(CategoryModel.class);
-                               categoryModelList.add(categoryModel);
-                               categoryAdapter.notifyDataSetChanged();
-                               linearLayout.setVisibility(View.VISIBLE);
-                               progressDialog.dismiss();
+                                CategoryModel categoryModel = document.toObject(CategoryModel.class);
+                                categoryModelList.add(categoryModel);
+                                categoryAdapter.notifyDataSetChanged();
+                                linearLayout.setVisibility(View.VISIBLE);
+                                progressDialog.dismiss();
                             }
                         } else {
-                            Toast.makeText(getActivity(), ""+task.getException(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getActivity(), "" + task.getException(), Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
         //New Products
-        newProductRecyclerview.setLayoutManager(new LinearLayoutManager(getActivity(),RecyclerView.HORIZONTAL,false));
+        newProductRecyclerview.setLayoutManager(new LinearLayoutManager(getActivity(), RecyclerView.HORIZONTAL, false));
         newProductsModelList = new ArrayList<>();
-        newProductsAdapter = new NewProductsAdapter(getContext(),newProductsModelList);
+        newProductsAdapter = new NewProductsAdapter(getContext(), newProductsModelList);
         newProductRecyclerview.setAdapter(newProductsAdapter);
 
         db.collection("NewProducts")
@@ -191,15 +190,15 @@ public class HomeFragment extends Fragment {
                             }
                         } else {
 
-                            Toast.makeText(getActivity(), ""+task.getException(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getActivity(), "" + task.getException(), Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
 
         //Popular product
-        trendProductRecyclerview.setLayoutManager(new GridLayoutManager(getActivity(),2,RecyclerView.HORIZONTAL,false));
+        trendProductRecyclerview.setLayoutManager(new GridLayoutManager(getActivity(), 2, RecyclerView.HORIZONTAL, false));
         popularProductsModelList = new ArrayList<>();
-        popularProductsAdapter = new PopularProductsAdapter(getContext(),popularProductsModelList);
+        popularProductsAdapter = new PopularProductsAdapter(getContext(), popularProductsModelList);
         trendProductRecyclerview.setAdapter(popularProductsAdapter);
 
         db.collection("AllProducts")
@@ -215,15 +214,15 @@ public class HomeFragment extends Fragment {
                             }
                         } else {
 
-                            Toast.makeText(getActivity(), ""+task.getException(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getActivity(), "" + task.getException(), Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
 
         //Suggest Products
-        suggestProductRecyclerview.setLayoutManager(new GridLayoutManager(getActivity(),2,RecyclerView.VERTICAL,false));
+        suggestProductRecyclerview.setLayoutManager(new GridLayoutManager(getActivity(), 2, RecyclerView.VERTICAL, false));
         suggestProductsModelList = new ArrayList<>();
-        suggestProductsAdapter = new SuggestProductsAdapter(getContext(),suggestProductsModelList);
+        suggestProductsAdapter = new SuggestProductsAdapter(getContext(), suggestProductsModelList);
         suggestProductRecyclerview.setAdapter(suggestProductsAdapter);
 
         db.collection("SuggestProducts")
@@ -239,7 +238,7 @@ public class HomeFragment extends Fragment {
                             }
                         } else {
 
-                            Toast.makeText(getActivity(), ""+task.getException(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getActivity(), "" + task.getException(), Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
@@ -248,7 +247,7 @@ public class HomeFragment extends Fragment {
         recyclerViewSearch = root.findViewById(R.id.search_rec);
         search_box = root.findViewById(R.id.search_box);
         showAllModelList = new ArrayList<>();
-        viewAllAdapter = new ShowAllAdapter(getContext(),showAllModelList);
+        viewAllAdapter = new ShowAllAdapter(getContext(), showAllModelList);
         recyclerViewSearch.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerViewSearch.setAdapter(viewAllAdapter);
         recyclerViewSearch.setHasFixedSize(true);
@@ -266,10 +265,10 @@ public class HomeFragment extends Fragment {
             @Override
             public void afterTextChanged(Editable editable) {
 
-                if(editable.toString().isEmpty()){
+                if (editable.toString().isEmpty()) {
                     showAllModelList.clear();
                     viewAllAdapter.notifyDataSetChanged();
-                }else{
+                } else {
 
                     searchProducttype(editable.toString());
                 }
@@ -281,16 +280,17 @@ public class HomeFragment extends Fragment {
 
     private void searchProducttype(String type) {
 
-        if(!type.isEmpty()){
-            db.collection("ShowAll").whereEqualTo("type",type).get()
+        if (!type.isEmpty()) {
+            db.collection("ShowAll").whereArrayContains("keywords",type)
+                    .get()
                     .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                         @Override
                         public void onComplete(@NonNull Task<QuerySnapshot> task) {
 
-                            if(task.isSuccessful() && task.getResult() != null){
+                            if (task.isSuccessful() && task.getResult() != null) {
                                 showAllModelList.clear();
                                 viewAllAdapter.notifyDataSetChanged();
-                                for(DocumentSnapshot doc : task.getResult().getDocuments()){
+                                for (DocumentSnapshot doc : task.getResult().getDocuments()) {
                                     ShowAllModel showAllModel = doc.toObject(ShowAllModel.class);
                                     showAllModelList.add(showAllModel);
                                     viewAllAdapter.notifyDataSetChanged();

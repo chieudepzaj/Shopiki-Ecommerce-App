@@ -26,13 +26,14 @@ import com.example.shopiki.models.Constant;
 public class ContractFrangment extends Fragment {
 
     TextView type;
-    EditText name,email,content;
+    EditText name, email, content;
     Button submit;
     private String adminemail = "chieumu1999@gmail.com";
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View root = inflater.inflate(R.layout.frangment_contract,container,false);
+        View root = inflater.inflate(R.layout.frangment_contract, container, false);
 
         type = root.findViewById(R.id.type_contract);
         name = root.findViewById(R.id.name_contract);
@@ -56,8 +57,10 @@ public class ContractFrangment extends Fragment {
 
         return root;
     }
-    private String subjectmail,contentmail,namemail,numberphonemail;
-    private void input(){
+
+    private String subjectmail, contentmail, namemail, numberphonemail;
+
+    private void input() {
         subjectmail = type.getText().toString().trim();
         contentmail = content.getText().toString().trim();
         namemail = name.getText().toString().trim();
@@ -83,12 +86,13 @@ public class ContractFrangment extends Fragment {
 
         sendEmail();
     }
+
     private void sendEmail() {
         Intent i = new Intent(Intent.ACTION_SEND);
         i.setType("message/rfc822");
-        i.putExtra(Intent.EXTRA_EMAIL , new String[]{"chieumu1999@gmail.com"});
+        i.putExtra(Intent.EXTRA_EMAIL, new String[]{"chieumu1999@gmail.com"});
         i.putExtra(Intent.EXTRA_SUBJECT, type.getText().toString());
-        i.putExtra(Intent.EXTRA_TEXT ,name.getText().toString() +": "+email.getText().toString()+"\n"+ content.getText().toString());
+        i.putExtra(Intent.EXTRA_TEXT, name.getText().toString() + ": " + email.getText().toString() + "\n" + content.getText().toString());
         try {
             startActivity(Intent.createChooser(i, "Send mail..."));
         } catch (android.content.ActivityNotFoundException ex) {

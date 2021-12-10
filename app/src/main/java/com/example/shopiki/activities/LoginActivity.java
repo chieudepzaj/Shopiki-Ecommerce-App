@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.shopiki.R;
@@ -21,16 +22,25 @@ public class LoginActivity extends AppCompatActivity {
     EditText email, password;
     String emailPattern = "[a-zA-Z0-9._-]+[a-zA-Z0-9._-]+[a-zA-Z0-9._-]+[a-zA-Z0-9._-]+[a-zA-Z0-9._-]+[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
     private FirebaseAuth auth;
+    ImageView imageView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-      //  getSupportActionBar().hide();
+        //  getSupportActionBar().hide();
 
         auth = FirebaseAuth.getInstance();
         email = findViewById(R.id.email);
         password = findViewById(R.id.password);
+        imageView = findViewById(R.id.imageView_main);
+
+        imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(LoginActivity.this, MainActivity.class));
+            }
+        });
 
     }
 
@@ -55,7 +65,7 @@ public class LoginActivity extends AppCompatActivity {
             return;
         }
 
-        auth.signInWithEmailAndPassword(userEmail,userPassword)
+        auth.signInWithEmailAndPassword(userEmail, userPassword)
                 .addOnCompleteListener(LoginActivity.this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
@@ -71,9 +81,10 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void signup(View view) {
-        startActivity(new Intent(LoginActivity.this,RegistrationActivity.class));
+        startActivity(new Intent(LoginActivity.this, RegistrationActivity.class));
     }
+
     public void signinadmin(View view) {
-        startActivity(new Intent(LoginActivity.this,AdminLoginActivity.class));
+        startActivity(new Intent(LoginActivity.this, AdminLoginActivity.class));
     }
 }

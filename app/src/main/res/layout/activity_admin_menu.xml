@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:background="@drawable/backgradmin"
+    android:orientation="vertical"
     tools:context=".activities.AdminMenu">
 
 
@@ -18,66 +18,41 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+<!--    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout-->
+<!--        android:id="@+id/pullToRefresh"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content">-->
+
+<!--        <ListView-->
+<!--            android:id="@+id/listView"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="match_parent" />-->
+<!--    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>-->
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/view_product"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:backgroundTint="@color/red_real"
-        android:text="Xem sản phẩm"
-        android:textColor="@color/white"
-        android:textAllCaps="false"
-        android:fontFamily="@font/shopee2021light"
-        android:textStyle="bold"
-        android:layout_marginTop="80dp"
         android:layout_marginLeft="30dp"
-       />
+        android:layout_marginTop="80dp"
+        android:backgroundTint="@color/red_real"
+        android:fontFamily="@font/shopee2021light"
+        android:text="Xem sản phẩm"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:textStyle="bold" />
+
     <com.google.android.material.button.MaterialButton
         android:id="@+id/add_product_fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:backgroundTint="@color/pink"
-        android:layout_marginTop="80dp"
-        android:text="Thêm sản phẩm"
-        android:textColor="@color/white"
-        android:textAllCaps="false"
-        android:fontFamily="@font/shopee2021light"
-        android:textStyle="bold"
         android:layout_marginLeft="200dp"
-        />
+        android:layout_marginTop="80dp"
+        android:backgroundTint="@color/pink"
+        android:fontFamily="@font/shopee2021light"
+        android:text="Thêm sản phẩm"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:textStyle="bold" />
 
-    <RelativeLayout
-        android:id="@+id/layoutRelativeOrderCheckButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="0dp">
-
-<!--        <LinearLayout-->
-<!--            android:id="@+id/layoutLinearOrderCheckButton"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:gravity="center"-->
-<!--            android:orientation="horizontal"-->
-<!--            android:weightSum="1">-->
-
-<!--            <Button-->
-<!--                android:id="@+id/adminOrderCheckButton"-->
-<!--                android:layout_width="0dp"-->
-<!--                android:layout_height="50dp"-->
-<!--                android:layout_gravity="center"-->
-<!--                android:layout_weight="1"-->
-<!--                android:background="@drawable/admin_order_check_button_style"-->
-<!--                android:gravity="center"-->
-<!--                android:text="more in future"-->
-<!--                android:textAllCaps="true"-->
-<!--                android:textColor="@color/white"-->
-<!--                android:textSize="30sp" />-->
-<!--        </LinearLayout>-->
-
-
-
-
-
-    </RelativeLayout>
 </RelativeLayout>
