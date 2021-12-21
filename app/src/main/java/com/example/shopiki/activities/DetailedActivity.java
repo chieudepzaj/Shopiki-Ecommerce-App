@@ -48,6 +48,7 @@ public class DetailedActivity extends AppCompatActivity {
     ImageView addItems, removeItems;
     float ratingba;
     private RatingBar ratingBar;
+    private String admin = "admin1999@gmail.com";
 
     Toolbar toolbar;
     int totalQuantity = 1;
@@ -105,6 +106,7 @@ public class DetailedActivity extends AppCompatActivity {
         addItems = findViewById(R.id.add_item);
         removeItems = findViewById(R.id.remove_item);
         ratingBar = findViewById(R.id.my_rating);
+
         LayerDrawable stars = (LayerDrawable) ratingBar.getProgressDrawable();
         stars.getDrawable(2).setColorFilter(Color.parseColor("#ffbe1a"), PorterDuff.Mode.SRC_ATOP);
         stars.getDrawable(0).setColorFilter(Color.parseColor("#ffbe1a"), PorterDuff.Mode.SRC_ATOP);

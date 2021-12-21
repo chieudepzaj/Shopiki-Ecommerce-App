@@ -76,7 +76,6 @@ public class AddProductActivity extends AppCompatActivity {
     int inputprice, type;
     //add keyword to array
     private ArrayList<String> keyword_array = new ArrayList<String>();
-    private int count_keyword = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -330,7 +329,7 @@ public class AddProductActivity extends AppCompatActivity {
                         @Override
                         public void onProgress(@NonNull UploadTask.TaskSnapshot snapshot) {
                             double progress = (100 * snapshot.getBytesTransferred()) / snapshot.getTotalByteCount();
-                            progressDialog.setMessage("Đang tải ảnh " + (upload_count) + " " + (int) progress + " %");
+                            progressDialog.setMessage("Đang tải " +progress + " %");
                         }
                     })
                     .addOnFailureListener(new OnFailureListener() {

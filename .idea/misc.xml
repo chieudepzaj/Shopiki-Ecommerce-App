@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/chieudepzaj/AndroidStudioProjects/Shopiki/app/src/main/res/drawable-v24/admin_delete_product_button.xml" value="0.1" />
         <entry key="..\:/Users/chieudepzaj/AndroidStudioProjects/Shopiki/app/src/main/res/drawable-v24/admin_order_check_button_style.xml" value="0.1" />
         <entry key="..\:/Users/chieudepzaj/AndroidStudioProjects/Shopiki/app/src/main/res/drawable-v24/baseline_contacts_24.xml" value="0.2703125" />
         <entry key="..\:/Users/chieudepzaj/AndroidStudioProjects/Shopiki/app/src/main/res/drawable-v24/baseline_logout_24.xml" value="0.2703125" />
@@ -13,6 +14,7 @@
         <entry key="..\:/Users/chieudepzaj/AndroidStudioProjects/Shopiki/app/src/main/res/drawable/ic_baseline_add_shopping_cart_24.xml" value="0.2703125" />
         <entry key="..\:/Users/chieudepzaj/AndroidStudioProjects/Shopiki/app/src/main/res/drawable/ic_baseline_chat_24.xml" value="0.2703125" />
         <entry key="..\:/Users/chieudepzaj/AndroidStudioProjects/Shopiki/app/src/main/res/drawable/ic_baseline_close_24.xml" value="0.2703125" />
+        <entry key="..\:/Users/chieudepzaj/AndroidStudioProjects/Shopiki/app/src/main/res/drawable/ic_baseline_delete_24.xml" value="0.2703125" />
         <entry key="..\:/Users/chieudepzaj/AndroidStudioProjects/Shopiki/app/src/main/res/drawable/ic_baseline_email_24.xml" value="0.2703125" />
         <entry key="..\:/Users/chieudepzaj/AndroidStudioProjects/Shopiki/app/src/main/res/drawable/ic_baseline_location_on_24.xml" value="0.24166666666666667" />
         <entry key="..\:/Users/chieudepzaj/AndroidStudioProjects/Shopiki/app/src/main/res/drawable/ic_baseline_loginout.xml" value="0.2703125" />
