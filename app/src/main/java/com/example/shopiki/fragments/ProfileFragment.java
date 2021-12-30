@@ -102,60 +102,86 @@ public class ProfileFragment extends Fragment {
 
         String filePathAndName = "profile/" + "" + timestamp;
         StorageReference storageReference = FirebaseStorage.getInstance().getReference(filePathAndName);
-        uploadTask = storageReference.putFile(image_uri);
-        uploadTask.addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-            @Override
-            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                if (taskSnapshot.getMetadata() != null) {
-                    if (taskSnapshot.getMetadata().getReference() != null) {
-                        Task<Uri> result = taskSnapshot.getStorage().getDownloadUrl();
-                        result.addOnSuccessListener(new OnSuccessListener<Uri>() {
-                            @Override
-                            public void onSuccess(Uri uri) {
-                                String imageUrl = uri.toString();
-                                //createNewPost(imageUrl);
-                                final HashMap<String, Object> cartMap = new HashMap<>();
-                                cartMap.put("name", name.getText().toString());
-                                cartMap.put("email", email.getText().toString());
-                                cartMap.put("phone", mobile.getText().toString());
-                                cartMap.put("address", address.getText().toString());
-                                cartMap.put("img_url", imageUrl);
+        if(image_uri != null && !image_uri.equals(Uri.EMPTY)) {
+            uploadTask = storageReference.putFile(image_uri);
+            uploadTask.addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                @Override
+                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                    if (taskSnapshot.getMetadata() != null) {
+                        if (taskSnapshot.getMetadata().getReference() != null) {
+                            Task<Uri> result = taskSnapshot.getStorage().getDownloadUrl();
+                            result.addOnSuccessListener(new OnSuccessListener<Uri>() {
+                                @Override
+                                public void onSuccess(Uri uri) {
+                                    String imageUrl = uri.toString();
+                                    //createNewPost(imageUrl);
+                                    final HashMap<String, Object> cartMap = new HashMap<>();
+                                    cartMap.put("name", name.getText().toString());
+                                    cartMap.put("email", email.getText().toString());
+                                    cartMap.put("phone", mobile.getText().toString());
+                                    cartMap.put("address", address.getText().toString());
+                                    cartMap.put("img_url", imageUrl);
 
-                                //update to db
-                                DatabaseReference reference = FirebaseDatabase.getInstance().getReference("user");
-                                reference.child(auth.getUid()).updateChildren(cartMap)
-                                        .addOnSuccessListener(new OnSuccessListener<Void>() {
-                                            @Override
-                                            public void onSuccess(Void unused) {
+                                    //update to db
+                                    DatabaseReference reference = FirebaseDatabase.getInstance().getReference("user");
+                                    reference.child(auth.getUid()).updateChildren(cartMap)
+                                            .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                @Override
+                                                public void onSuccess(Void unused) {
 
-                                                Toast.makeText(getContext(), "Cập nhật thông tin cá nhân thành công.", Toast.LENGTH_SHORT).show();
-                                            }
-                                        })
-                                        .addOnFailureListener(new OnFailureListener() {
-                                            @Override
-                                            public void onFailure(@NonNull Exception e) {
+                                                    Toast.makeText(getContext(), "Cập nhật thông tin cá nhân thành công.", Toast.LENGTH_SHORT).show();
+                                                }
+                                            })
+                                            .addOnFailureListener(new OnFailureListener() {
+                                                @Override
+                                                public void onFailure(@NonNull Exception e) {
 
-                                                Toast.makeText(getContext(), "" + e.getMessage(), Toast.LENGTH_SHORT).show();
-                                            }
-                                        });
+                                                    Toast.makeText(getContext(), "" + e.getMessage(), Toast.LENGTH_SHORT).show();
+                                                }
+                                            });
 
 
-                            }
-                        });
+                                }
+                            });
+                        }
                     }
+
+
                 }
+            })
 
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Toast.makeText(getContext(), "" + e.getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    });
+        } else {
+            final HashMap<String, Object> cartMap = new HashMap<>();
+            cartMap.put("name", name.getText().toString());
+            cartMap.put("email", email.getText().toString());
+            cartMap.put("phone", mobile.getText().toString());
+            cartMap.put("address", address.getText().toString());
 
-            }
-        })
+            //update to db
+            DatabaseReference reference = FirebaseDatabase.getInstance().getReference("user");
+            reference.child(auth.getUid()).updateChildren(cartMap)
+                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void unused) {
 
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(getContext(), "" + e.getMessage(), Toast.LENGTH_SHORT).show();
-                    }
-                });
+                            Toast.makeText(getContext(), "Cập nhật thông tin cá nhân thành công.", Toast.LENGTH_SHORT).show();
+                        }
+                    })
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
 
+                            Toast.makeText(getContext(), "" + e.getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    });
+
+        }
 
     }
 

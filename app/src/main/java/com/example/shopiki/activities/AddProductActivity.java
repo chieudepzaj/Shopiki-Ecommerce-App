@@ -237,111 +237,112 @@ public class AddProductActivity extends AppCompatActivity {
         progressDialog.setCanceledOnTouchOutside(false);
         progressDialog.show();
 
+        if(image_uri != null && !image_uri.equals(Uri.EMPTY)) {
+            for (upload_count = 0; upload_count < image_url.size(); upload_count++) {
+                String timestamp = "" + System.currentTimeMillis();
+                String filePathAndName = "products/" + "" + timestamp;
+                StorageReference storageReference = FirebaseStorage.getInstance().getReference(filePathAndName);
+                Uri IndividualImage = image_url.get(upload_count);
+                uploadTask = storageReference.putFile(IndividualImage);
+                uploadTask.addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                    @Override
+                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                        if (taskSnapshot.getMetadata() != null) {
+                            if (taskSnapshot.getMetadata().getReference() != null) {
+                                Task<Uri> result = taskSnapshot.getStorage().getDownloadUrl();
+                                result.addOnSuccessListener(new OnSuccessListener<Uri>() {
+                                    @Override
+                                    public void onSuccess(Uri uri) {
+                                        String imageUrl = uri.toString();
+                                        urlImage.add(imageUrl);
+                                        if (urlImage.size() == image_url.size()) {
+                                            //createNewPost(imageUrl);
+                                            final HashMap<String, Object> cartMap = new HashMap<>();
+                                            cartMap.put("name", name.getText().toString());
+                                            cartMap.put("price", inputprice);
+                                            cartMap.put("description", description.getText().toString());
+                                            cartMap.put("rating", rating.getText().toString());
+                                            cartMap.put("type", category.getText().toString());
+                                            for (int i = 0; i < urlImage.size(); i++) {
+                                                if (i == 0) {
+                                                    cartMap.put("img_url", urlImage.get(i));
+                                                } else {
+                                                    cartMap.put("img_url" + i, urlImage.get(i));
+                                                }
 
-        for (upload_count = 0; upload_count < image_url.size(); upload_count++) {
-            String timestamp = "" + System.currentTimeMillis();
-            String filePathAndName = "products/" + "" + timestamp;
-            StorageReference storageReference = FirebaseStorage.getInstance().getReference(filePathAndName);
-            Uri IndividualImage = image_url.get(upload_count);
-            uploadTask = storageReference.putFile(IndividualImage);
-            uploadTask.addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                @Override
-                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                    if (taskSnapshot.getMetadata() != null) {
-                        if (taskSnapshot.getMetadata().getReference() != null) {
-                            Task<Uri> result = taskSnapshot.getStorage().getDownloadUrl();
-                            result.addOnSuccessListener(new OnSuccessListener<Uri>() {
-                                @Override
-                                public void onSuccess(Uri uri) {
-                                    String imageUrl = uri.toString();
-                                    urlImage.add(imageUrl);
-                                    if (urlImage.size() == image_url.size()) {
-                                        //createNewPost(imageUrl);
-                                        final HashMap<String, Object> cartMap = new HashMap<>();
-                                        cartMap.put("name", name.getText().toString());
-                                        cartMap.put("price", inputprice);
-                                        cartMap.put("description", description.getText().toString());
-                                        cartMap.put("rating", rating.getText().toString());
-                                        cartMap.put("type", category.getText().toString());
-                                        for (int i = 0; i < urlImage.size(); i++) {
-                                            if (i == 0) {
-                                                cartMap.put("img_url", urlImage.get(i));
-                                            } else {
-                                                cartMap.put("img_url" + i, urlImage.get(i));
                                             }
 
-                                        }
 
-
-
-
-                                        if (type == 1) {
-                                            db.collection("NewProducts").add(cartMap).addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
-                                                @Override
-                                                public void onComplete(@NonNull Task<DocumentReference> task) {
-                                                    progressDialog.dismiss();
-                                                    Toast.makeText(AddProductActivity.this, "Đã thêm sản phẩm mới", Toast.LENGTH_SHORT).show();
-                                                    clearData();
-                                                }
-                                            });
-                                        }
-                                        if (type == 2) {
-                                            db.collection("AllProducts").add(cartMap).addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
-                                                @Override
-                                                public void onComplete(@NonNull Task<DocumentReference> task) {
-                                                    progressDialog.dismiss();
-                                                    Toast.makeText(AddProductActivity.this, "Đã thêm sản phẩm mới", Toast.LENGTH_SHORT).show();
-                                                    clearData();
-                                                }
-                                            });
-                                        }
-                                        if (type == 3) {
-                                            db.collection("SuggestProducts").add(cartMap).addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
-                                                @Override
-                                                public void onComplete(@NonNull Task<DocumentReference> task) {
-                                                    progressDialog.dismiss();
-                                                    Toast.makeText(AddProductActivity.this, "Đã thêm sản phẩm mới", Toast.LENGTH_SHORT).show();
-                                                    clearData();
-                                                }
-                                            });
-                                        }
-
-                                        //add keyword array to db
-                                        cartMap.put("keywords", keyword_array);
-
-                                        db.collection("ShowAll").add(cartMap).addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
-                                            @Override
-                                            public void onComplete(@NonNull Task<DocumentReference> task) {
-
+                                            if (type == 1) {
+                                                db.collection("NewProducts").add(cartMap).addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
+                                                    @Override
+                                                    public void onComplete(@NonNull Task<DocumentReference> task) {
+                                                        progressDialog.dismiss();
+                                                        Toast.makeText(AddProductActivity.this, "Đã thêm sản phẩm mới", Toast.LENGTH_SHORT).show();
+                                                        clearData();
+                                                    }
+                                                });
                                             }
-                                        });
+                                            if (type == 2) {
+                                                db.collection("AllProducts").add(cartMap).addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
+                                                    @Override
+                                                    public void onComplete(@NonNull Task<DocumentReference> task) {
+                                                        progressDialog.dismiss();
+                                                        Toast.makeText(AddProductActivity.this, "Đã thêm sản phẩm mới", Toast.LENGTH_SHORT).show();
+                                                        clearData();
+                                                    }
+                                                });
+                                            }
+                                            if (type == 3) {
+                                                db.collection("SuggestProducts").add(cartMap).addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
+                                                    @Override
+                                                    public void onComplete(@NonNull Task<DocumentReference> task) {
+                                                        progressDialog.dismiss();
+                                                        Toast.makeText(AddProductActivity.this, "Đã thêm sản phẩm mới", Toast.LENGTH_SHORT).show();
+                                                        clearData();
+                                                    }
+                                                });
+                                            }
 
+                                            //add keyword array to db
+                                            cartMap.put("keywords", keyword_array);
+
+                                            db.collection("ShowAll").add(cartMap).addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
+                                                @Override
+                                                public void onComplete(@NonNull Task<DocumentReference> task) {
+
+                                                }
+                                            });
+
+                                        }
                                     }
-                                }
-                            });
+                                });
+                            }
                         }
+
+
                     }
+                })
+                        .addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
+                            @Override
+                            public void onProgress(@NonNull UploadTask.TaskSnapshot snapshot) {
+                                double progress = (100 * snapshot.getBytesTransferred()) / snapshot.getTotalByteCount();
+                                progressDialog.setMessage("Đang tải " + progress + " %");
+                            }
+                        })
+                        .addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                progressDialog.dismiss();
+                                Toast.makeText(AddProductActivity.this, "" + e.getMessage(), Toast.LENGTH_SHORT).show();
+                            }
+                        });
+            }
 
-
-                }
-            })
-                    .addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
-                        @Override
-                        public void onProgress(@NonNull UploadTask.TaskSnapshot snapshot) {
-                            double progress = (100 * snapshot.getBytesTransferred()) / snapshot.getTotalByteCount();
-                            progressDialog.setMessage("Đang tải " +progress + " %");
-                        }
-                    })
-                    .addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-                            progressDialog.dismiss();
-                            Toast.makeText(AddProductActivity.this, "" + e.getMessage(), Toast.LENGTH_SHORT).show();
-                        }
-                    });
+        } else {
+            progressDialog.dismiss();
+            Toast.makeText(AddProductActivity.this, "Bạn chưa upload ảnh sản phẩm!", Toast.LENGTH_SHORT).show();
         }
-
-
     }
 
     private void clearData() {
